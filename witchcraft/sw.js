@@ -1,6 +1,6 @@
 // Bewaart de app zodat hij snel opent en ook zonder internet het schema laat zien.
 const TEAM = "witchcraft";
-const CACHE = TEAM + "-68b50da3";
+const CACHE = TEAM + "-ed4c922e";
 const SHELL = ["./", "index.html", "../config.js?v=4", "manifest.webmanifest", "logo.png",
   "icons/icon-192.png", "icons/icon-512.png", "icons/apple-touch-icon.png",
   "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"];
