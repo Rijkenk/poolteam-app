@@ -538,7 +538,7 @@ const pctTxt=(w,p)=>p?Math.round(100*w/p)+"%":"–";
 function renderStats(st){
   if(!st||!Array.isArray(st.team))return;
   const cell=(s,cls="")=>s&&s.p?`<td class="${cls}"><span class="pc">${pctTxt(s.w,s.p)}</span><span class="wg">${s.w}/${s.p}</span></td>`:`<td class="${cls}"><span class="wg">–</span></td>`;
-  const rows=[...st.team].sort((a,b)=>(b.p?b.w/b.p:-1)-(a.p?a.w/a.p:-1)||a.name.localeCompare(b.name));
+  const rows=[...st.team,...PLAYERS.filter(q=>!st.team.some(t=>t.id===q.id)).map(q=>({id:q.id,name:q.name,p:0,w:0,g:{}}))].sort((a,b)=>(b.p?b.w/b.p:-1)-(a.p?a.w/a.p:-1)||a.name.localeCompare(b.name));
   $("ptbl").innerHTML=`<thead><tr><th>Speler</th>${SG.map(([,n,l])=>`<th title="${n}">${l}</th>`).join("")}<th title="Alle enkelpartijen">Enkel</th></tr></thead><tbody>`+
     rows.map(p=>`<tr class="${p.id===me?"us":""}"><td>${esc(first(p.name))}</td>${SG.map(([k])=>cell(p.g[k])).join("")}${cell({p:p.p,w:p.w},"tot")}</tr>`).join("")+"</tbody>";
   const mvpRows=(list,ranked)=>`<thead><tr><th>#</th><th>Speler</th><th title="Gewonnen/gespeeld">W/G</th><th title="Deel van de teamwedstrijden gespeeld">Gesp.</th><th>MVP</th></tr></thead><tbody>`+
