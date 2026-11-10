@@ -118,7 +118,7 @@ select{background:var(--surface);border:1px solid var(--line);border-radius:8px;
 .ha{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
 .mine{font-size:11px}
 .grp{display:flex;flex-direction:column;gap:8px}.fr{display:flex;gap:6px;align-items:stretch}.fr button{flex:1;min-width:0}.cs{display:grid;place-items:center;width:40px;flex:none;border:1px solid var(--line);border-radius:10px;color:var(--fire);text-decoration:none;font-weight:700}.cs:hover{border-color:var(--fire)}.taglink{color:inherit;text-decoration:none}.taglink:hover{border-color:var(--fire)}
-.tabs{display:grid;grid-template-columns:1fr 1fr;gap:4px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:4px;position:sticky;top:env(safe-area-inset-top,0px);z-index:5}
+.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:4px;position:sticky;top:env(safe-area-inset-top,0px);z-index:5}
 .tabs button{border:0;background:transparent;border-radius:9px;padding:10px 8px;font-weight:600;color:var(--muted);cursor:pointer}
 .tabs button[aria-selected="true"]{background:var(--fire);color:#160a00}
 .tabpane{display:flex;flex-direction:column;gap:20px}
@@ -130,6 +130,10 @@ select{background:var(--surface);border:1px solid var(--line);border-radius:8px;
 .tbl th:nth-child(2),.tbl td:nth-child(2){text-align:left}
 .tbl td:nth-child(2){white-space:normal;min-width:96px}
 .tbl td:last-child{font-weight:700}
+.ptbl th,.ptbl td{min-width:0!important;text-align:center!important;padding-left:2px!important;padding-right:2px!important}.ptbl th:first-child,.ptbl td:first-child{text-align:left!important;white-space:normal;min-width:0!important;max-width:72px;overflow:hidden;text-overflow:ellipsis}.ptbl td:last-child{font-weight:400}
+.ptbl .pc{display:block;font-weight:700;font-size:13px}.ptbl .wg{display:block;font-size:11px;color:var(--muted)}.ptbl .tot{background:var(--felt)}
+.mvptbl td:nth-child(2) small{display:block;color:var(--muted);font-size:11px;font-weight:400}.mvptbl tr.us td small{color:inherit;opacity:.8}
+.lowpr{margin-top:12px}.lowpr summary{cursor:pointer;color:var(--muted);font-size:13px;padding:6px 0}.hint.small{font-size:12px;margin-top:8px}
 .tbl tr.us td{background:var(--felt-soft);color:var(--fire-2);font-weight:600}
 .cslink{color:var(--fire);font-size:13px;text-decoration:none;font-weight:600}
 .res{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
@@ -197,7 +201,8 @@ footer a{color:inherit}
 
   <nav class="tabs" role="tablist" aria-label="Onderdelen">
     <button type="button" role="tab" id="tab-btn-wedstrijd" data-tab="wedstrijd" aria-selected="true">Wedstrijd</button>
-    <button type="button" role="tab" id="tab-btn-stand" data-tab="stand" aria-selected="false">Stand &amp; uitslagen</button>
+    <button type="button" role="tab" id="tab-btn-stand" data-tab="stand" aria-selected="false">Stand</button>
+    <button type="button" role="tab" id="tab-btn-spelers" data-tab="spelers" aria-selected="false">Spelers</button>
   </nav>
 
   <div class="tabpane" id="tab-wedstrijd">
@@ -265,6 +270,20 @@ footer a{color:inherit}
       <div><h2>Stand Eerste Klasse</h2><p class="hint" id="standhint">Van CueScore.</p></div>
       <div class="tblwrap"><table class="tbl" id="tbl"></table></div>
       <a class="cslink" href="https://cuescore.com/tournament/Pool+Overijssel+Eerste+Klasse+2026%252F2027/83574430" target="_blank" rel="noopener">Actuele stand op CueScore ↗</a>
+    </section>
+  </div>
+
+  <div class="tabpane" id="tab-spelers" hidden>
+    <section class="card">
+      <div><h2>Onze spelers</h2><p class="hint" id="statshint">Percentage gewonnen partijen per spelsoort, uit alle uitslagen op CueScore.</p></div>
+      <div class="tblwrap"><table class="tbl ptbl" id="ptbl"></table></div>
+      <p class="hint small">Enkel = alle enkelpartijen samen (koppel telt niet mee), net als in de MVP-lijst.</p>
+    </section>
+    <section class="card">
+      <div><h2>MVP-lijst</h2><p class="hint">Iedereen in de Eerste Klasse Overijssel, op percentage gewonnen enkelpartijen. Wie minder dan 60% van de wedstrijden van zijn team speelde, staat onderaan apart.</p></div>
+      <div class="tblwrap"><table class="tbl mvptbl" id="mvp"></table></div>
+      <details class="lowpr"><summary id="lowsum">Minder dan 60% gespeeld</summary><div class="tblwrap"><table class="tbl mvptbl" id="mvplow"></table></div></details>
+      <a class="cslink" href="https://cuescore.com/tournament/Pool+Overijssel+Eerste+Klasse+2026%252F2027/83574430/mvp" target="_blank" rel="noopener">MVP-lijst op CueScore ↗</a>
     </section>
   </div>
 
@@ -440,7 +459,7 @@ function renderAll(){if(!selected)return;renderBoard();renderMine();renderTeam()
 // Spelerkeuze
 for(const p of PLAYERS){const o=document.createElement("option");o.value=p.id;o.textContent=p.name;$("me").appendChild(o)}
 $("me").value=me;
-$("me").addEventListener("change",e=>{me=e.target.value;store.set(T.slug+"-me",me);syncAuth();$("codemsg").textContent="";renderAll()});
+$("me").addEventListener("change",e=>{me=e.target.value;renderStats(STATS);store.set(T.slug+"-me",me);syncAuth();$("codemsg").textContent="";renderAll()});
 
 function onPick(e){const b=e.target.closest("button[data-no]");if(!b)return;selected=MATCHES.find(m=>m.no===+b.dataset.no);renderAll();$("board").scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"start"})}
 $("fix").addEventListener("click",onPick);$("past").addEventListener("click",onPick);
@@ -476,11 +495,12 @@ $("need").addEventListener("change",ev=>{
 });
 
 function showTab(name){
-  for(const t of["wedstrijd","stand"]){$("tab-"+t).hidden=t!==name;$("tab-btn-"+t).setAttribute("aria-selected",String(t===name))}
+  for(const t of["wedstrijd","stand","spelers"]){$("tab-"+t).hidden=t!==name;$("tab-btn-"+t).setAttribute("aria-selected",String(t===name))}
 }
-document.querySelectorAll(".tabs button").forEach(b=>b.addEventListener("click",()=>{showTab(b.dataset.tab);try{history.replaceState(null,"",b.dataset.tab==="stand"?"#stand":"#")}catch(e){location.hash=b.dataset.tab==="stand"?"stand":""}}));
-window.addEventListener("hashchange",()=>showTab(location.hash==="#stand"?"stand":"wedstrijd"));
-showTab(location.hash==="#stand"?"stand":"wedstrijd");
+document.querySelectorAll(".tabs button").forEach(b=>b.addEventListener("click",()=>{showTab(b.dataset.tab);try{history.replaceState(null,"",b.dataset.tab==="wedstrijd"?"#":"#"+b.dataset.tab)}catch(e){location.hash=b.dataset.tab==="wedstrijd"?"":b.dataset.tab}}));
+const tabFromHash=()=>({"#stand":"stand","#spelers":"spelers"})[location.hash]||"wedstrijd";
+window.addEventListener("hashchange",()=>showTab(tabFromHash()));
+showTab(tabFromHash());
 
 
 if(T.cs)applyCs(T.cs);else renderAll();
@@ -512,6 +532,25 @@ async function loadCs(){
   try{const r=await fetch("data/cuescore.json",{cache:"no-store"});if(r.ok)applyCs(await r.json())}catch(e){}
 }
 loadCs();
+// Spelersstatistieken (elk uur berekend door GitHub Actions)
+const SG=[["8b","8-ball","8"],["9b","9-ball","9"],["10b","10-ball","10"],["141","Straight pool","14.1"],["k9b","Koppel 9-ball","K9"]];
+const pctTxt=(w,p)=>p?Math.round(100*w/p)+"%":"–";
+function renderStats(st){
+  if(!st||!Array.isArray(st.team))return;
+  const cell=(s,cls="")=>s&&s.p?`<td class="${cls}"><span class="pc">${pctTxt(s.w,s.p)}</span><span class="wg">${s.w}/${s.p}</span></td>`:`<td class="${cls}"><span class="wg">–</span></td>`;
+  const rows=[...st.team].sort((a,b)=>(b.p?b.w/b.p:-1)-(a.p?a.w/a.p:-1)||a.name.localeCompare(b.name));
+  $("ptbl").innerHTML=`<thead><tr><th>Speler</th>${SG.map(([,n,l])=>`<th title="${n}">${l}</th>`).join("")}<th title="Alle enkelpartijen">Enkel</th></tr></thead><tbody>`+
+    rows.map(p=>`<tr class="${p.id===me?"us":""}"><td>${esc(first(p.name))}</td>${SG.map(([k])=>cell(p.g[k])).join("")}${cell({p:p.p,w:p.w},"tot")}</tr>`).join("")+"</tbody>";
+  const mvpRows=(list,ranked)=>`<thead><tr><th>#</th><th>Speler</th><th title="Gewonnen/gespeeld">W/G</th><th title="Deel van de teamwedstrijden gespeeld">Gesp.</th><th>MVP</th></tr></thead><tbody>`+
+    list.map((x,i)=>`<tr class="${x.us?"us":""}"><td>${ranked?i+1:""}</td><td>${esc(x.name)}<small>${esc(x.team||"")}</small></td><td>${x.w}/${x.p}</td><td>${Math.round(x.pr*100)}%</td><td>${Math.round(x.pct*100)}%</td></tr>`).join("")+"</tbody>";
+  const hi=st.mvp.filter(x=>!x.low),lo=st.mvp.filter(x=>x.low);
+  $("mvp").innerHTML=mvpRows(hi,true);$("mvplow").innerHTML=mvpRows(lo,false);
+  $("lowsum").textContent=`Minder dan 60% gespeeld (${lo.length})`;$("lowsum").parentElement.hidden=!lo.length;
+  if(st.updated)$("statshint").textContent=`Percentage gewonnen partijen per spelsoort, van CueScore, bijgewerkt ${new Intl.DateTimeFormat("nl-NL",{day:"numeric",month:"long",hour:"2-digit",minute:"2-digit"}).format(new Date(st.updated))}.`;
+}
+let STATS=null;
+async function loadStats(){try{const r=await fetch("data/stats.json",{cache:"no-cache"});if(r.ok){STATS=await r.json();renderStats(STATS)}}catch(e){}}
+loadStats();
 document.addEventListener("visibilitychange",()=>{if(!document.hidden)loadCs()});
 
 // Teamcode
