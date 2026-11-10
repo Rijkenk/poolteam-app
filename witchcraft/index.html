@@ -498,6 +498,21 @@ function showTab(name){
   for(const t of["wedstrijd","stand","spelers"]){$("tab-"+t).hidden=t!==name;$("tab-btn-"+t).setAttribute("aria-selected",String(t===name))}
 }
 document.querySelectorAll(".tabs button").forEach(b=>b.addEventListener("click",()=>{showTab(b.dataset.tab);try{history.replaceState(null,"",b.dataset.tab==="wedstrijd"?"#":"#"+b.dataset.tab)}catch(e){location.hash=b.dataset.tab==="wedstrijd"?"":b.dataset.tab}}));
+// Vegen naar links/rechts wisselt van tabblad
+const TABS=["wedstrijd","stand","spelers"];
+function goTab(name){showTab(name);try{history.replaceState(null,"",name==="wedstrijd"?"#":"#"+name)}catch(e){}
+  const t=document.querySelector(".tabs");if(t&&t.getBoundingClientRect().top<0)t.scrollIntoView({block:"start"})}
+(()=>{let x0=null,y0=0,t0=0;
+  document.addEventListener("touchstart",e=>{x0=null;if(e.touches.length!==1)return;const t=e.touches[0],el=e.target;
+    if(t.clientX<24||t.clientX>innerWidth-24)return; // randen zijn voor terug/vooruit van de telefoon
+    if(el.closest("input,select,textarea"))return;
+    const w=el.closest(".tblwrap");if(w&&w.scrollWidth>w.clientWidth+2)return; // tabel die zelf schuift
+    x0=t.clientX;y0=t.clientY;t0=Date.now()},{passive:true});
+  document.addEventListener("touchend",e=>{if(x0===null)return;const t=e.changedTouches[0],dx=t.clientX-x0,dy=t.clientY-y0;x0=null;
+    if(Math.abs(dx)<70||Math.abs(dx)<2*Math.abs(dy)||Date.now()-t0>800)return;
+    const cur=TABS.findIndex(n=>!$("tab-"+n).hidden),next=cur+(dx<0?1:-1);
+    if(next>=0&&next<TABS.length)goTab(TABS[next])},{passive:true});
+})();
 const tabFromHash=()=>({"#stand":"stand","#spelers":"spelers"})[location.hash]||"wedstrijd";
 window.addEventListener("hashchange",()=>showTab(tabFromHash()));
 showTab(tabFromHash());
