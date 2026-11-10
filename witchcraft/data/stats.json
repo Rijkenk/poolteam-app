@@ -1,19 +1,19 @@
 {
- "updated": "2026-11-10T16:35:00Z",
+ "updated": "2026-11-10T21:48:31Z",
  "team": [
   {
    "id": "1160910",
    "name": "Imre Florijn",
-   "p": 8,
-   "w": 4,
+   "p": 9,
+   "w": 5,
    "pr": 1,
-   "m": 5,
+   "m": 6,
    "g": {
     "141": {
-     "p": 1,
-     "w": 0,
-     "fw": 30,
-     "fl": 60
+     "p": 2,
+     "w": 1,
+     "fw": 90,
+     "fl": 104
     },
     "9b": {
      "p": 2,
@@ -44,10 +44,10 @@
   {
    "id": "1160764",
    "name": "Jeroen Van Valkenhoef",
-   "p": 5,
-   "w": 4,
-   "pr": 0.8,
-   "m": 4,
+   "p": 6,
+   "w": 5,
+   "pr": 1,
+   "m": 5,
    "g": {
     "141": {
      "p": 2,
@@ -62,10 +62,10 @@
      "fl": 8
     },
     "10b": {
-     "p": 1,
-     "w": 1,
-     "fw": 6,
-     "fl": 3
+     "p": 2,
+     "w": 2,
+     "fw": 12,
+     "fl": 6
     },
     "8b": {
      "p": 2,
@@ -78,10 +78,10 @@
   {
    "id": "1160896",
    "name": "Robère de Groot",
-   "p": 6,
-   "w": 3,
-   "pr": 0.8,
-   "m": 4,
+   "p": 7,
+   "w": 4,
+   "pr": 1,
+   "m": 5,
    "g": {
     "141": {
      "p": 1,
@@ -108,20 +108,20 @@
      "fl": 3
     },
     "9b": {
-     "p": 1,
-     "w": 1,
-     "fw": 7,
-     "fl": 6
+     "p": 2,
+     "w": 2,
+     "fw": 14,
+     "fl": 7
     }
    }
   },
   {
    "id": "1160908",
    "name": "Roland Zwolsman",
-   "p": 6,
+   "p": 7,
    "w": 2,
-   "pr": 0.8,
-   "m": 4,
+   "pr": 1,
+   "m": 5,
    "g": {
     "141": {
      "p": 1,
@@ -148,10 +148,10 @@
      "fl": 10
     },
     "8b": {
-     "p": 1,
+     "p": 2,
      "w": 0,
-     "fw": 4,
-     "fl": 5
+     "fw": 6,
+     "fl": 10
     }
    }
   }
@@ -162,10 +162,10 @@
    "name": "Darrin Craggs",
    "team": "Breaktime",
    "us": false,
-   "p": 7,
-   "w": 7,
+   "p": 8,
+   "w": 8,
    "pct": 1,
-   "pr": 0.667,
+   "pr": 0.833,
    "low": false
   },
   {
@@ -173,8 +173,8 @@
    "name": "Jelle Vrijhoeven",
    "team": "Roze Ferdi en de Flamingo’s",
    "us": false,
-   "p": 5,
-   "w": 5,
+   "p": 6,
+   "w": 6,
    "pct": 1,
    "pr": 1,
    "low": false
@@ -184,10 +184,10 @@
    "name": "Norman Bakker",
    "team": "Hengelo Nine",
    "us": false,
-   "p": 5,
-   "w": 5,
+   "p": 6,
+   "w": 6,
    "pct": 1,
-   "pr": 0.833,
+   "pr": 1,
    "low": false
   },
   {
@@ -202,17 +202,6 @@
    "low": false
   },
   {
-   "id": "1160359",
-   "name": "Kees Kooper",
-   "team": "PVE Eightballers",
-   "us": false,
-   "p": 2,
-   "w": 2,
-   "pct": 1,
-   "pr": 0.6,
-   "low": false
-  },
-  {
    "id": "1160650",
    "name": "Sha Chong Woo",
    "team": "Cuejones",
@@ -222,6 +211,17 @@
    "pct": 1,
    "pr": 0.333,
    "low": true
+  },
+  {
+   "id": "1160600",
+   "name": "Mike Van Onselen",
+   "team": "Hengelo Nine",
+   "us": false,
+   "p": 9,
+   "w": 8,
+   "pct": 0.889,
+   "pr": 1,
+   "low": false
   },
   {
    "id": "1162288",
@@ -235,36 +235,14 @@
    "low": false
   },
   {
-   "id": "1160600",
-   "name": "Mike Van Onselen",
-   "team": "Hengelo Nine",
-   "us": false,
-   "p": 7,
-   "w": 6,
-   "pct": 0.857,
-   "pr": 0.833,
-   "low": false
-  },
-  {
    "id": "1160764",
    "name": "Jeroen Van Valkenhoef",
    "team": "Witchcraft",
    "us": true,
-   "p": 5,
-   "w": 4,
-   "pct": 0.8,
-   "pr": 0.8,
-   "low": false
-  },
-  {
-   "id": "1160374",
-   "name": "Richard Gringhuis",
-   "team": "Keus Genoeg",
-   "us": false,
-   "p": 5,
-   "w": 4,
-   "pct": 0.8,
-   "pr": 0.8,
+   "p": 6,
+   "w": 5,
+   "pct": 0.833,
+   "pr": 1,
    "low": false
   },
   {
@@ -272,10 +250,10 @@
    "name": "Bart Mistrate Haarhuis",
    "team": "Hengelo Nine",
    "us": false,
-   "p": 7,
-   "w": 5,
-   "pct": 0.714,
-   "pr": 0.833,
+   "p": 8,
+   "w": 6,
+   "pct": 0.75,
+   "pr": 1,
    "low": false
   },
   {
@@ -290,6 +268,17 @@
    "low": false
   },
   {
+   "id": "1160374",
+   "name": "Richard Gringhuis",
+   "team": "Keus Genoeg",
+   "us": false,
+   "p": 6,
+   "w": 4,
+   "pct": 0.667,
+   "pr": 1,
+   "low": false
+  },
+  {
    "id": "1160596",
    "name": "Jorg Bonnamy",
    "team": "Breaktime",
@@ -299,6 +288,17 @@
    "pct": 0.667,
    "pr": 0.5,
    "low": true
+  },
+  {
+   "id": "1160359",
+   "name": "Kees Kooper",
+   "team": "PVE Eightballers",
+   "us": false,
+   "p": 3,
+   "w": 2,
+   "pct": 0.667,
+   "pr": 0.8,
+   "low": false
   },
   {
    "id": "1164365",
@@ -320,28 +320,6 @@
    "w": 5,
    "pct": 0.625,
    "pr": 0.833,
-   "low": false
-  },
-  {
-   "id": "30007777",
-   "name": "Misha Zoet",
-   "team": "Roze Ferdi en de Flamingo’s",
-   "us": false,
-   "p": 5,
-   "w": 3,
-   "pct": 0.6,
-   "pr": 0.8,
-   "low": false
-  },
-  {
-   "id": "1160492",
-   "name": "Sander Meester",
-   "team": "PVE Eightballers",
-   "us": false,
-   "p": 5,
-   "w": 3,
-   "pct": 0.6,
-   "pr": 0.6,
    "low": false
   },
   {
@@ -378,13 +356,24 @@
    "low": false
   },
   {
+   "id": "1160896",
+   "name": "Robère de Groot",
+   "team": "Witchcraft",
+   "us": true,
+   "p": 7,
+   "w": 4,
+   "pct": 0.571,
+   "pr": 1,
+   "low": false
+  },
+  {
    "id": "1160910",
    "name": "Imre Florijn",
    "team": "Witchcraft",
    "us": true,
-   "p": 8,
-   "w": 4,
-   "pct": 0.5,
+   "p": 9,
+   "w": 5,
+   "pct": 0.556,
    "pr": 1,
    "low": false
   },
@@ -400,10 +389,32 @@
    "low": false
   },
   {
-   "id": "1160896",
-   "name": "Robère de Groot",
-   "team": "Witchcraft",
-   "us": true,
+   "id": "1160383",
+   "name": "Miquel Broer",
+   "team": "Breaktime",
+   "us": false,
+   "p": 6,
+   "w": 3,
+   "pct": 0.5,
+   "pr": 0.833,
+   "low": false
+  },
+  {
+   "id": "30007777",
+   "name": "Misha Zoet",
+   "team": "Roze Ferdi en de Flamingo’s",
+   "us": false,
+   "p": 6,
+   "w": 3,
+   "pct": 0.5,
+   "pr": 1,
+   "low": false
+  },
+  {
+   "id": "1160492",
+   "name": "Sander Meester",
+   "team": "PVE Eightballers",
+   "us": false,
    "p": 6,
    "w": 3,
    "pct": 0.5,
@@ -470,32 +481,10 @@
    "name": "Boris Gaarthuis",
    "team": "Roze Ferdi en de Flamingo’s",
    "us": false,
-   "p": 7,
+   "p": 8,
    "w": 3,
-   "pct": 0.429,
+   "pct": 0.375,
    "pr": 1,
-   "low": false
-  },
-  {
-   "id": "1160383",
-   "name": "Miquel Broer",
-   "team": "Breaktime",
-   "us": false,
-   "p": 5,
-   "w": 2,
-   "pct": 0.4,
-   "pr": 0.667,
-   "low": false
-  },
-  {
-   "id": "1160908",
-   "name": "Roland Zwolsman",
-   "team": "Witchcraft",
-   "us": true,
-   "p": 6,
-   "w": 2,
-   "pct": 0.333,
-   "pr": 0.8,
    "low": false
   },
   {
@@ -521,25 +510,36 @@
    "low": true
   },
   {
-   "id": "1160602",
-   "name": "Mattijs Alink",
+   "id": "1159421",
+   "name": "Patrick Hekhuis",
    "team": "Keus Genoeg",
+   "us": false,
+   "p": 7,
+   "w": 2,
+   "pct": 0.286,
+   "pr": 1,
+   "low": false
+  },
+  {
+   "id": "1160908",
+   "name": "Roland Zwolsman",
+   "team": "Witchcraft",
+   "us": true,
+   "p": 7,
+   "w": 2,
+   "pct": 0.286,
+   "pr": 1,
+   "low": false
+  },
+  {
+   "id": "1163629",
+   "name": "Bart Engelbertink",
+   "team": "Breaktime",
    "us": false,
    "p": 8,
    "w": 2,
    "pct": 0.25,
    "pr": 1,
-   "low": false
-  },
-  {
-   "id": "9310330",
-   "name": "Erwin Noorlander-Stijlaart",
-   "team": "PVE Eightballers",
-   "us": false,
-   "p": 4,
-   "w": 1,
-   "pct": 0.25,
-   "pr": 0.6,
    "low": false
   },
   {
@@ -565,13 +565,24 @@
    "low": false
   },
   {
-   "id": "1159421",
-   "name": "Patrick Hekhuis",
+   "id": "1160602",
+   "name": "Mattijs Alink",
    "team": "Keus Genoeg",
    "us": false,
-   "p": 6,
+   "p": 10,
+   "w": 2,
+   "pct": 0.2,
+   "pr": 1,
+   "low": false
+  },
+  {
+   "id": "9310330",
+   "name": "Erwin Noorlander-Stijlaart",
+   "team": "PVE Eightballers",
+   "us": false,
+   "p": 5,
    "w": 1,
-   "pct": 0.167,
+   "pct": 0.2,
    "pr": 0.8,
    "low": false
   },
@@ -584,17 +595,6 @@
    "w": 1,
    "pct": 0.167,
    "pr": 1,
-   "low": false
-  },
-  {
-   "id": "1163629",
-   "name": "Bart Engelbertink",
-   "team": "Breaktime",
-   "us": false,
-   "p": 7,
-   "w": 1,
-   "pct": 0.143,
-   "pr": 0.833,
    "low": false
   },
   {
@@ -613,9 +613,9 @@
    "name": "Patrick Haasewinkel",
    "team": "Breaktime",
    "us": false,
-   "p": 8,
+   "p": 9,
    "w": 1,
-   "pct": 0.125,
+   "pct": 0.111,
    "pr": 1,
    "low": false
   },
@@ -635,10 +635,10 @@
    "name": "Thijs Harmsen",
    "team": "Roze Ferdi en de Flamingo’s",
    "us": false,
-   "p": 4,
+   "p": 5,
    "w": 0,
    "pct": 0,
-   "pr": 0.8,
+   "pr": 1,
    "low": false
   },
   {
@@ -646,10 +646,10 @@
    "name": "Pascal Huiskes",
    "team": "PVE Eightballers",
    "us": false,
-   "p": 3,
+   "p": 4,
    "w": 0,
    "pct": 0,
-   "pr": 0.6,
+   "pr": 0.8,
    "low": false
   }
  ]

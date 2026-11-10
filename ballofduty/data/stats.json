@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-10T17:18:56Z",
+ "updated": "2026-11-10T21:48:29Z",
  "team": [
   {
    "id": "1162921",
@@ -238,6 +238,17 @@
    "low": false
   },
   {
+   "id": "63805717",
+   "name": "Joram De Jonge",
+   "team": "Sjoel98",
+   "us": false,
+   "p": 7,
+   "w": 6,
+   "pct": 0.857,
+   "pr": 1,
+   "low": false
+  },
+  {
    "id": "72991780",
    "name": "Thijmen ten Hove",
    "team": "Sjoel Shooters",
@@ -247,17 +258,6 @@
    "pct": 0.857,
    "pr": 0.571,
    "low": true
-  },
-  {
-   "id": "63805717",
-   "name": "Joram De Jonge",
-   "team": "Sjoel98",
-   "us": false,
-   "p": 6,
-   "w": 5,
-   "pct": 0.833,
-   "pr": 0.833,
-   "low": false
   },
   {
    "id": "18284674",
@@ -579,6 +579,17 @@
    "low": false
   },
   {
+   "id": "63137764",
+   "name": "Quincy Lovert",
+   "team": "Sjoel98",
+   "us": false,
+   "p": 6,
+   "w": 3,
+   "pct": 0.5,
+   "pr": 1,
+   "low": false
+  },
+  {
    "id": "60278740",
    "name": "Roel van Engelen",
    "team": "Sjoel Shooters",
@@ -711,17 +722,6 @@
    "low": false
   },
   {
-   "id": "63137764",
-   "name": "Quincy Lovert",
-   "team": "Sjoel98",
-   "us": false,
-   "p": 5,
-   "w": 2,
-   "pct": 0.4,
-   "pr": 0.833,
-   "low": false
-  },
-  {
    "id": "74710435",
    "name": "Dick Van Duijn",
    "team": "Pocket Hunters",
@@ -817,7 +817,7 @@
    "p": 7,
    "w": 2,
    "pct": 0.286,
-   "pr": 0.833,
+   "pr": 1,
    "low": false
   },
   {
@@ -825,10 +825,10 @@
    "name": "Owen Huisman",
    "team": "De 6 Muskebiers",
    "us": false,
-   "p": 7,
+   "p": 8,
    "w": 2,
-   "pct": 0.286,
-   "pr": 0.833,
+   "pct": 0.25,
+   "pr": 1,
    "low": false
   },
   {
@@ -861,8 +861,8 @@
    "p": 4,
    "w": 1,
    "pct": 0.25,
-   "pr": 0.5,
-   "low": true
+   "pr": 0.667,
+   "low": false
   },
   {
    "id": "18034573",
@@ -935,9 +935,9 @@
    "name": "Nikola Kupsjak",
    "team": "De 6 Muskebiers",
    "us": false,
-   "p": 8,
+   "p": 9,
    "w": 1,
-   "pct": 0.125,
+   "pct": 0.111,
    "pr": 1,
    "low": false
   },
@@ -993,8 +993,8 @@
    "p": 3,
    "w": 0,
    "pct": 0,
-   "pr": 0.5,
-   "low": true
+   "pr": 0.667,
+   "low": false
   },
   {
    "id": "73224802",
