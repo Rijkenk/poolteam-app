@@ -358,7 +358,7 @@ function renderBoard(){
     <div class="vs">${home}<div class="mid">tegen</div>${away}</div>
     <div class="meta"><span class="tag">${m.thuis?"Thuis":"Uit"}</span><span class="tag">${esc(m.venue)}</span><a class="tag taglink" href="${m.url||CS}" target="_blank" rel="noopener">Wedstrijd ${m.no} op CueScore ↗</a></div>
     <div class="count">${dbReady?`${yes} van ${PLAYERS.length} spelers hebben zich aangemeld`:"Opgaves laden…"}</div>
-    ${dbReady&&m.date>now?(yes<MIN_SPELERS?`<div class="quorum short"><b>Nog ${MIN_SPELERS-yes} ${MIN_SPELERS-yes===1?"speler":"spelers"} nodig.</b> Met minder dan ${MIN_SPELERS} spelers gaat de wedstrijd niet door.${m.date-now>72*3600e3?` Is het ${fmtDeadline.format(new Date(m.date-72*3600e3))} nog niet genoeg, dan krijgt de captain een melding.`:""}</div>`:`<div class="quorum ok">Genoeg spelers, de wedstrijd gaat door.</div>`):""}`;
+    ${dbReady&&m.date>now?(yes<MIN_SPELERS?`<div class="quorum short"><b>Nog ${MIN_SPELERS-yes} ${MIN_SPELERS-yes===1?"speler":"spelers"} nodig.</b> Met minder dan ${MIN_SPELERS} spelers gaat de wedstrijd niet door.${T.alerts&&m.date-now>72*3600e3?` Is het ${fmtDeadline.format(new Date(m.date-72*3600e3))} nog niet genoeg, dan krijgt de captain een melding.`:""}</div>`:`<div class="quorum ok">Genoeg spelers, de wedstrijd gaat door.</div>`):""}`;
 }
 function cap(s){return s.charAt(0).toUpperCase()+s.slice(1)}
 function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
