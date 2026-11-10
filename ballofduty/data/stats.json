@@ -1,0 +1,1016 @@
+{
+ "updated": "2026-11-10T16:35:28Z",
+ "team": [
+  {
+   "id": "1162921",
+   "name": "Kenneth Rijken",
+   "p": 9,
+   "w": 3,
+   "pr": 0.857,
+   "g": {
+    "141": {
+     "p": 4,
+     "w": 1,
+     "fw": 151,
+     "fl": 188
+    },
+    "k9b": {
+     "p": 2,
+     "w": 1,
+     "fw": 7,
+     "fl": 8
+    },
+    "8b": {
+     "p": 2,
+     "w": 1,
+     "fw": 7,
+     "fl": 9
+    },
+    "10b": {
+     "p": 3,
+     "w": 1,
+     "fw": 9,
+     "fl": 10
+    }
+   }
+  },
+  {
+   "id": "62677414",
+   "name": "Laura Gielen",
+   "p": 6,
+   "w": 2,
+   "pr": 0.714,
+   "g": {
+    "k9b": {
+     "p": 3,
+     "w": 2,
+     "fw": 11,
+     "fl": 10
+    },
+    "8b": {
+     "p": 4,
+     "w": 1,
+     "fw": 11,
+     "fl": 18
+    },
+    "10b": {
+     "p": 2,
+     "w": 1,
+     "fw": 8,
+     "fl": 6
+    }
+   }
+  },
+  {
+   "id": "62678155",
+   "name": "Marco Oude middendorp",
+   "p": 5,
+   "w": 2,
+   "pr": 0.714,
+   "g": {
+    "141": {
+     "p": 3,
+     "w": 0,
+     "fw": 57,
+     "fl": 150
+    },
+    "9b": {
+     "p": 2,
+     "w": 2,
+     "fw": 12,
+     "fl": 6
+    },
+    "k9b": {
+     "p": 1,
+     "w": 0,
+     "fw": 3,
+     "fl": 5
+    }
+   }
+  },
+  {
+   "id": "48336892",
+   "name": "Patrick chirco",
+   "p": 2,
+   "w": 1,
+   "pr": 0.286,
+   "g": {
+    "8b": {
+     "p": 2,
+     "w": 1,
+     "fw": 7,
+     "fl": 8
+    },
+    "k9b": {
+     "p": 1,
+     "w": 1,
+     "fw": 5,
+     "fl": 4
+    }
+   }
+  },
+  {
+   "id": "78493855",
+   "name": "Ross Jelsma",
+   "p": 9,
+   "w": 5,
+   "pr": 0.857,
+   "g": {
+    "k9b": {
+     "p": 5,
+     "w": 3,
+     "fw": 19,
+     "fl": 19
+    },
+    "9b": {
+     "p": 5,
+     "w": 3,
+     "fw": 26,
+     "fl": 23
+    },
+    "8b": {
+     "p": 4,
+     "w": 2,
+     "fw": 16,
+     "fl": 15
+    }
+   }
+  },
+  {
+   "id": "65125873",
+   "name": "Stefan van der Blij",
+   "p": 4,
+   "w": 0,
+   "pr": 0.429,
+   "g": {
+    "8b": {
+     "p": 2,
+     "w": 0,
+     "fw": 4,
+     "fl": 10
+    },
+    "10b": {
+     "p": 2,
+     "w": 0,
+     "fw": 4,
+     "fl": 10
+    },
+    "k9b": {
+     "p": 2,
+     "w": 1,
+     "fw": 7,
+     "fl": 8
+    }
+   }
+  }
+ ],
+ "mvp": [
+  {
+   "id": "60194776",
+   "name": "Yannick Bunnik",
+   "team": "Sjoel Shooters",
+   "us": false,
+   "p": 7,
+   "w": 7,
+   "pct": 1,
+   "pr": 0.571,
+   "low": true
+  },
+  {
+   "id": "1162348",
+   "name": "Robbert Bos",
+   "team": "Het Fundament Der Synagoge",
+   "us": false,
+   "p": 6,
+   "w": 6,
+   "pct": 1,
+   "pr": 0.714,
+   "low": false
+  },
+  {
+   "id": "60308653",
+   "name": "Coen Post",
+   "team": "Het Fundament Der Synagoge",
+   "us": false,
+   "p": 2,
+   "w": 2,
+   "pct": 1,
+   "pr": 0.143,
+   "low": true
+  },
+  {
+   "id": "53867149",
+   "name": "Tara Craggs",
+   "team": "Cueflitz",
+   "us": false,
+   "p": 1,
+   "w": 1,
+   "pct": 1,
+   "pr": 0.143,
+   "low": true
+  },
+  {
+   "id": "63523312",
+   "name": "Remco Wigbers",
+   "team": "De Ballen verstand",
+   "us": false,
+   "p": 11,
+   "w": 10,
+   "pct": 0.909,
+   "pr": 1,
+   "low": false
+  },
+  {
+   "id": "64400464",
+   "name": "Tom Michorius",
+   "team": "'T stek ons niks",
+   "us": false,
+   "p": 10,
+   "w": 9,
+   "pct": 0.9,
+   "pr": 0.857,
+   "low": false
+  },
+  {
+   "id": "72991780",
+   "name": "Thijmen ten Hove",
+   "team": "Sjoel Shooters",
+   "us": false,
+   "p": 7,
+   "w": 6,
+   "pct": 0.857,
+   "pr": 0.571,
+   "low": true
+  },
+  {
+   "id": "63805717",
+   "name": "Joram De Jonge",
+   "team": "Sjoel98",
+   "us": false,
+   "p": 6,
+   "w": 5,
+   "pct": 0.833,
+   "pr": 0.833,
+   "low": false
+  },
+  {
+   "id": "18284674",
+   "name": "Dennis Hoogvorst",
+   "team": "The Cue Crusaders",
+   "us": false,
+   "p": 5,
+   "w": 4,
+   "pct": 0.8,
+   "pr": 0.833,
+   "low": false
+  },
+  {
+   "id": "72706609",
+   "name": "Gijs Overmeer",
+   "team": "De Sjoeligans",
+   "us": false,
+   "p": 5,
+   "w": 4,
+   "pct": 0.8,
+   "pr": 0.667,
+   "low": false
+  },
+  {
+   "id": "1163632",
+   "name": "Rex Labrijn",
+   "team": "'T stek ons niks",
+   "us": false,
+   "p": 5,
+   "w": 4,
+   "pct": 0.8,
+   "pr": 0.571,
+   "low": true
+  },
+  {
+   "id": "1162969",
+   "name": "Riccardo Sirchia",
+   "team": "BallBreakers",
+   "us": false,
+   "p": 5,
+   "w": 4,
+   "pct": 0.8,
+   "pr": 0.667,
+   "low": false
+  },
+  {
+   "id": "1163354",
+   "name": "Peter van der Parren",
+   "team": "Cueflitz",
+   "us": false,
+   "p": 9,
+   "w": 7,
+   "pct": 0.778,
+   "pr": 0.857,
+   "low": false
+  },
+  {
+   "id": "1164714",
+   "name": "Anouk van der Parren",
+   "team": "Cueflitz",
+   "us": false,
+   "p": 8,
+   "w": 6,
+   "pct": 0.75,
+   "pr": 1,
+   "low": false
+  },
+  {
+   "id": "82628659",
+   "name": "Jurriën Bouwkamp",
+   "team": "BallBreakers",
+   "us": false,
+   "p": 4,
+   "w": 3,
+   "pct": 0.75,
+   "pr": 0.5,
+   "low": true
+  },
+  {
+   "id": "13682257",
+   "name": "Kees Harmsen",
+   "team": "The Pooligans",
+   "us": false,
+   "p": 4,
+   "w": 3,
+   "pct": 0.75,
+   "pr": 0.571,
+   "low": true
+  },
+  {
+   "id": "19972273",
+   "name": "Niek Bijen",
+   "team": "The Cue Crusaders",
+   "us": false,
+   "p": 4,
+   "w": 3,
+   "pct": 0.75,
+   "pr": 0.5,
+   "low": true
+  },
+  {
+   "id": "1161702",
+   "name": "Robin van Doorn",
+   "team": "Sjoel Shooters",
+   "us": false,
+   "p": 4,
+   "w": 3,
+   "pct": 0.75,
+   "pr": 0.429,
+   "low": true
+  },
+  {
+   "id": "36636373",
+   "name": "Wouter Kamps",
+   "team": "Sjoel Shooters",
+   "us": false,
+   "p": 4,
+   "w": 3,
+   "pct": 0.75,
+   "pr": 0.429,
+   "low": true
+  },
+  {
+   "id": "63505054",
+   "name": "Sidney Lovert",
+   "team": "Sjoel98",
+   "us": false,
+   "p": 7,
+   "w": 5,
+   "pct": 0.714,
+   "pr": 1,
+   "low": false
+  },
+  {
+   "id": "30693613",
+   "name": "Brian Klatt",
+   "team": "The Cue Crusaders",
+   "us": false,
+   "p": 9,
+   "w": 6,
+   "pct": 0.667,
+   "pr": 1,
+   "low": false
+  },
+  {
+   "id": "1185947",
+   "name": "Carlo Wijering",
+   "team": "The Pooligans",
+   "us": false,
+   "p": 9,
+   "w": 6,
+   "pct": 0.667,
+   "pr": 0.857,
+   "low": false
+  },
+  {
+   "id": "1702376",
+   "name": "Jan van der Sluis",
+   "team": "'T stek ons niks",
+   "us": false,
+   "p": 3,
+   "w": 2,
+   "pct": 0.667,
+   "pr": 0.286,
+   "low": true
+  },
+  {
+   "id": "1164076",
+   "name": "Baik de Jong",
+   "team": "De gedraaide ballen",
+   "us": false,
+   "p": 8,
+   "w": 5,
+   "pct": 0.625,
+   "pr": 1,
+   "low": false
+  },
+  {
+   "id": "72782038",
+   "name": "Armel Dam",
+   "team": "Het Fundament Der Synagoge",
+   "us": false,
+   "p": 10,
+   "w": 6,
+   "pct": 0.6,
+   "pr": 1,
+   "low": false
+  },
+  {
+   "id": "69419710",
+   "name": "Louw Veenstra",
+   "team": "De Ballen verstand",
+   "us": false,
+   "p": 10,
+   "w": 6,
+   "pct": 0.6,
+   "pr": 1,
+   "low": false
+  },
+  {
+   "id": "50998693",
+   "name": "Marcin Jasinski",
+   "team": "The Cue Crusaders",
+   "us": false,
+   "p": 5,
+   "w": 3,
+   "pct": 0.6,
+   "pr": 0.5,
+   "low": true
+  },
+  {
+   "id": "1162347",
+   "name": "Rainer Kirchner",
+   "team": "BallBreakers",
+   "us": false,
+   "p": 5,
+   "w": 3,
+   "pct": 0.6,
+   "pr": 0.667,
+   "low": false
+  },
+  {
+   "id": "62634325",
+   "name": "Tim Olthof",
+   "team": "BallBreakers",
+   "us": false,
+   "p": 5,
+   "w": 3,
+   "pct": 0.6,
+   "pr": 0.5,
+   "low": true
+  },
+  {
+   "id": "63135796",
+   "name": "Elwood Flierman",
+   "team": "Het Fundament Der Synagoge",
+   "us": false,
+   "p": 7,
+   "w": 4,
+   "pct": 0.571,
+   "pr": 0.857,
+   "low": false
+  },
+  {
+   "id": "78493855",
+   "name": "Ross Jelsma",
+   "team": "Ball of Duty",
+   "us": true,
+   "p": 9,
+   "w": 5,
+   "pct": 0.556,
+   "pr": 0.857,
+   "low": false
+  },
+  {
+   "id": "1162937",
+   "name": "Tom Groot",
+   "team": "Cueflitz",
+   "us": false,
+   "p": 11,
+   "w": 6,
+   "pct": 0.545,
+   "pr": 1,
+   "low": false
+  },
+  {
+   "id": "72562396",
+   "name": "David de Leau",
+   "team": "De Sjoeligans",
+   "us": false,
+   "p": 8,
+   "w": 4,
+   "pct": 0.5,
+   "pr": 1,
+   "low": false
+  },
+  {
+   "id": "18356089",
+   "name": "Robin VLeeuwen",
+   "team": "De gedraaide ballen",
+   "us": false,
+   "p": 8,
+   "w": 4,
+   "pct": 0.5,
+   "pr": 1,
+   "low": false
+  },
+  {
+   "id": "1163450",
+   "name": "Jean Paul Roelofs",
+   "team": "The Pooligans",
+   "us": false,
+   "p": 6,
+   "w": 3,
+   "pct": 0.5,
+   "pr": 0.714,
+   "low": false
+  },
+  {
+   "id": "18016759",
+   "name": "jens van de wetering",
+   "team": "De gedraaide ballen",
+   "us": false,
+   "p": 6,
+   "w": 3,
+   "pct": 0.5,
+   "pr": 0.833,
+   "low": false
+  },
+  {
+   "id": "1164423",
+   "name": "Matthieu Middelman",
+   "team": "Cueflitz",
+   "us": false,
+   "p": 6,
+   "w": 3,
+   "pct": 0.5,
+   "pr": 0.714,
+   "low": false
+  },
+  {
+   "id": "60278740",
+   "name": "Roel van Engelen",
+   "team": "Sjoel Shooters",
+   "us": false,
+   "p": 4,
+   "w": 2,
+   "pct": 0.5,
+   "pr": 0.571,
+   "low": true
+  },
+  {
+   "id": "90440629",
+   "name": "Shengyu Liu",
+   "team": "Pocket Hunters",
+   "us": false,
+   "p": 4,
+   "w": 2,
+   "pct": 0.5,
+   "pr": 0.571,
+   "low": true
+  },
+  {
+   "id": "75737290",
+   "name": "Benjamin Labobar",
+   "team": "BallBreakers",
+   "us": false,
+   "p": 2,
+   "w": 1,
+   "pct": 0.5,
+   "pr": 0.5,
+   "low": true
+  },
+  {
+   "id": "48336892",
+   "name": "Patrick chirco",
+   "team": "Ball of Duty",
+   "us": true,
+   "p": 2,
+   "w": 1,
+   "pct": 0.5,
+   "pr": 0.286,
+   "low": true
+  },
+  {
+   "id": "48179968",
+   "name": "Casper Van der Sloot",
+   "team": "The Cue Crusaders",
+   "us": false,
+   "p": 7,
+   "w": 3,
+   "pct": 0.429,
+   "pr": 1,
+   "low": false
+  },
+  {
+   "id": "56701888",
+   "name": "Christiaan Hindriks",
+   "team": "De Ballen verstand",
+   "us": false,
+   "p": 7,
+   "w": 3,
+   "pct": 0.429,
+   "pr": 0.857,
+   "low": false
+  },
+  {
+   "id": "1162960",
+   "name": "Gerard Leemhuis",
+   "team": "De Ballen verstand",
+   "us": false,
+   "p": 7,
+   "w": 3,
+   "pct": 0.429,
+   "pr": 0.857,
+   "low": false
+  },
+  {
+   "id": "65263012",
+   "name": "Naftali Patty",
+   "team": "Sjoel Shooters",
+   "us": false,
+   "p": 7,
+   "w": 3,
+   "pct": 0.429,
+   "pr": 0.714,
+   "low": false
+  },
+  {
+   "id": "88840024",
+   "name": "Yutong Zhang",
+   "team": "'T stek ons niks",
+   "us": false,
+   "p": 7,
+   "w": 3,
+   "pct": 0.429,
+   "pr": 0.714,
+   "low": false
+  },
+  {
+   "id": "60209794",
+   "name": "Guus Koelman",
+   "team": "BallBreakers",
+   "us": false,
+   "p": 5,
+   "w": 2,
+   "pct": 0.4,
+   "pr": 0.667,
+   "low": false
+  },
+  {
+   "id": "62678155",
+   "name": "Marco Oude middendorp",
+   "team": "Ball of Duty",
+   "us": true,
+   "p": 5,
+   "w": 2,
+   "pct": 0.4,
+   "pr": 0.714,
+   "low": false
+  },
+  {
+   "id": "73310242",
+   "name": "Mert Özgoren",
+   "team": "De Sjoeligans",
+   "us": false,
+   "p": 5,
+   "w": 2,
+   "pct": 0.4,
+   "pr": 0.667,
+   "low": false
+  },
+  {
+   "id": "63137764",
+   "name": "Quincy Lovert",
+   "team": "Sjoel98",
+   "us": false,
+   "p": 5,
+   "w": 2,
+   "pct": 0.4,
+   "pr": 0.833,
+   "low": false
+  },
+  {
+   "id": "74710435",
+   "name": "Dick Van Duijn",
+   "team": "Pocket Hunters",
+   "us": false,
+   "p": 8,
+   "w": 3,
+   "pct": 0.375,
+   "pr": 1,
+   "low": false
+  },
+  {
+   "id": "18016765",
+   "name": "Justin de Wit",
+   "team": "De gedraaide ballen",
+   "us": false,
+   "p": 8,
+   "w": 3,
+   "pct": 0.375,
+   "pr": 1,
+   "low": false
+  },
+  {
+   "id": "1162921",
+   "name": "Kenneth Rijken",
+   "team": "Ball of Duty",
+   "us": true,
+   "p": 9,
+   "w": 3,
+   "pct": 0.333,
+   "pr": 0.857,
+   "low": false
+  },
+  {
+   "id": "62130304",
+   "name": "Jordi Timmer",
+   "team": "Pocket Hunters",
+   "us": false,
+   "p": 6,
+   "w": 2,
+   "pct": 0.333,
+   "pr": 0.857,
+   "low": false
+  },
+  {
+   "id": "62677414",
+   "name": "Laura Gielen",
+   "team": "Ball of Duty",
+   "us": true,
+   "p": 6,
+   "w": 2,
+   "pct": 0.333,
+   "pr": 0.714,
+   "low": false
+  },
+  {
+   "id": "64425244",
+   "name": "Ewald Bevers",
+   "team": "'T stek ons niks",
+   "us": false,
+   "p": 3,
+   "w": 1,
+   "pct": 0.333,
+   "pr": 0.429,
+   "low": true
+  },
+  {
+   "id": "63785404",
+   "name": "Jeffrey Lovert",
+   "team": "Sjoel98",
+   "us": false,
+   "p": 3,
+   "w": 1,
+   "pct": 0.333,
+   "pr": 0.5,
+   "low": true
+  },
+  {
+   "id": "30797032",
+   "name": "Lucas Van Mook",
+   "team": "The Pooligans",
+   "us": false,
+   "p": 10,
+   "w": 3,
+   "pct": 0.3,
+   "pr": 1,
+   "low": false
+  },
+  {
+   "id": "69782989",
+   "name": "Martijn Pereboom",
+   "team": "De 6 Muskebiers",
+   "us": false,
+   "p": 7,
+   "w": 2,
+   "pct": 0.286,
+   "pr": 0.833,
+   "low": false
+  },
+  {
+   "id": "72562480",
+   "name": "Owen Huisman",
+   "team": "De 6 Muskebiers",
+   "us": false,
+   "p": 7,
+   "w": 2,
+   "pct": 0.286,
+   "pr": 0.833,
+   "low": false
+  },
+  {
+   "id": "78675622",
+   "name": "Rosa Hoogsteder",
+   "team": "Pocket Hunters",
+   "us": false,
+   "p": 8,
+   "w": 2,
+   "pct": 0.25,
+   "pr": 1,
+   "low": false
+  },
+  {
+   "id": "81089416",
+   "name": "Abraham van Putten",
+   "team": "BallBreakers",
+   "us": false,
+   "p": 4,
+   "w": 1,
+   "pct": 0.25,
+   "pr": 0.667,
+   "low": false
+  },
+  {
+   "id": "84741142",
+   "name": "Jonathan Solcer",
+   "team": "Sjoel98",
+   "us": false,
+   "p": 4,
+   "w": 1,
+   "pct": 0.25,
+   "pr": 0.5,
+   "low": true
+  },
+  {
+   "id": "18034573",
+   "name": "Marco Rexwinkel",
+   "team": "Pocket Hunters",
+   "us": false,
+   "p": 9,
+   "w": 2,
+   "pct": 0.222,
+   "pr": 0.857,
+   "low": false
+  },
+  {
+   "id": "65041606",
+   "name": "Abinash Vinayagamoorthy",
+   "team": "Sjoel98",
+   "us": false,
+   "p": 5,
+   "w": 1,
+   "pct": 0.2,
+   "pr": 0.833,
+   "low": false
+  },
+  {
+   "id": "75740578",
+   "name": "Leanne Labobar",
+   "team": "De Sjoeligans",
+   "us": false,
+   "p": 5,
+   "w": 1,
+   "pct": 0.2,
+   "pr": 0.667,
+   "low": false
+  },
+  {
+   "id": "67010215",
+   "name": "Ymke Jonge",
+   "team": "De 6 Muskebiers",
+   "us": false,
+   "p": 5,
+   "w": 1,
+   "pct": 0.2,
+   "pr": 0.667,
+   "low": false
+  },
+  {
+   "id": "18367969",
+   "name": "Jochem Boogert",
+   "team": "The Pooligans",
+   "us": false,
+   "p": 6,
+   "w": 1,
+   "pct": 0.167,
+   "pr": 0.857,
+   "low": false
+  },
+  {
+   "id": "60198727",
+   "name": "Marit Bronsgeest",
+   "team": "De Sjoeligans",
+   "us": false,
+   "p": 7,
+   "w": 1,
+   "pct": 0.143,
+   "pr": 1,
+   "low": false
+  },
+  {
+   "id": "72588313",
+   "name": "Nikola Kupsjak",
+   "team": "De 6 Muskebiers",
+   "us": false,
+   "p": 8,
+   "w": 1,
+   "pct": 0.125,
+   "pr": 1,
+   "low": false
+  },
+  {
+   "id": "6331649",
+   "name": "Mark Nijkamp",
+   "team": "'T stek ons niks",
+   "us": false,
+   "p": 6,
+   "w": 0,
+   "pct": 0,
+   "pr": 1,
+   "low": false
+  },
+  {
+   "id": "63869113",
+   "name": "Stijn Olivier Hasselt",
+   "team": "Het Fundament Der Synagoge",
+   "us": false,
+   "p": 6,
+   "w": 0,
+   "pct": 0,
+   "pr": 0.571,
+   "low": true
+  },
+  {
+   "id": "61760656",
+   "name": "Brian van der Wal",
+   "team": "Het Fundament Der Synagoge",
+   "us": false,
+   "p": 4,
+   "w": 0,
+   "pct": 0,
+   "pr": 0.429,
+   "low": true
+  },
+  {
+   "id": "65125873",
+   "name": "Stefan van der Blij",
+   "team": "Ball of Duty",
+   "us": true,
+   "p": 4,
+   "w": 0,
+   "pct": 0,
+   "pr": 0.429,
+   "low": true
+  },
+  {
+   "id": "75734626",
+   "name": "Daniël Heikens",
+   "team": "De 6 Muskebiers",
+   "us": false,
+   "p": 3,
+   "w": 0,
+   "pct": 0,
+   "pr": 0.5,
+   "low": true
+  },
+  {
+   "id": "73224802",
+   "name": "Ezzaldeen Alqasme",
+   "team": "Sjoel Shooters",
+   "us": false,
+   "p": 2,
+   "w": 0,
+   "pct": 0,
+   "pr": 0.286,
+   "low": true
+  },
+  {
+   "id": "6282778",
+   "name": "Casper Bevers",
+   "team": "'T stek ons niks",
+   "us": false,
+   "p": 1,
+   "w": 0,
+   "pct": 0,
+   "pr": 0.143,
+   "low": true
+  }
+ ]
+}
