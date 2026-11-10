@@ -8,10 +8,9 @@ jobs:
       - uses: actions/checkout@v4
       - run: |
           mkdir -p tmpprobe
-          curl -sS "https://api.cuescore.com/match/?id=88313743" -o tmpprobe/match.json; echo "match $(wc -c < tmpprobe/match.json)"
-          curl -sS "https://api.cuescore.com/match/?matchId=88313743" -o tmpprobe/match2.json; echo "match2 $(wc -c < tmpprobe/match2.json)"
-          curl -sSL "https://cuescore.com/tournament/Pool+Overijssel+Eerste+Klasse+2026%252F2027/83574430" -o tmpprobe/t.html; echo "html $(wc -c < tmpprobe/t.html)"
-          curl -sSL "https://cuescore.com/match/?matchId=88313743" -o tmpprobe/m.html; echo "mhtml $(wc -c < tmpprobe/m.html)"
-          curl -sSL "https://cuescore.com/team/Witchcraft/1176555" -o tmpprobe/team.html; echo "team $(wc -c < tmpprobe/team.html)"
+          curl -sSL "https://cuescore.com/tournament/Pool+Overijssel+Eerste+Klasse+2026%252F2027/83574430/mvp" -o tmpprobe/mvp.html; echo "mvp $(wc -c < tmpprobe/mvp.html)"
+          curl -sSL "https://cuescore.com/js/cuescore.min-1.93.js" -o tmpprobe/cs.js; echo "js $(wc -c < tmpprobe/cs.js)"
+          curl -sSL "https://cuescore.com/js/cs/cs.min-1.93.js" -o tmpprobe/cs2.js; echo "js2 $(wc -c < tmpprobe/cs2.js)"
+          curl -sSL "https://api.cuescore.com/js/CueScore.min-4.02.js" -o tmpprobe/api.js; echo "apijs $(wc -c < tmpprobe/api.js)"
           git config user.name bot; git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add tmpprobe && git commit -qm probe && git push
+          git add tmpprobe && git commit -qm probe2 && git push
