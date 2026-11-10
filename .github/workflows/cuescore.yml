@@ -4,7 +4,7 @@ on:
   schedule:
     - cron: "17 * * * *"   # elk uur
   push:
-    paths: ["teams/**", "app/**", "scripts/**"]
+    paths: ["teams/**", "app/**", "scripts/**", ".github/workflows/cuescore.yml"]
   workflow_dispatch:
 
 permissions:
@@ -31,3 +31,9 @@ jobs:
           git add -A
           git commit -m "CueScore-gegevens bijgewerkt"
           git push
+      - name: Database wakker houden (gratis Supabase pauzeert na een week zonder gebruik)
+        if: always()
+        run: |
+          U=$(grep -o 'supabaseUrl: *"[^"]*"' config.js | cut -d'"' -f2); K=$(grep -o 'supabaseKey: *"[^"]*"' config.js | cut -d'"' -f2)
+          code=$(curl -s -o /dev/null -w '%{http_code}' -H "apikey: $K" -H "Authorization: Bearer $K" "$U/rest/v1/opgaves?select=match&limit=1")
+          echo "Supabase antwoordde met $code"
