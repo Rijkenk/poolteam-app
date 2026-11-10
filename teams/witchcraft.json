@@ -1,0 +1,24 @@
+{
+  "slug": "witchcraft",
+  "name": "Witchcraft",
+  "cuescoreTeamId": 1176555,
+  "tournamentId": 83574430,
+  "teamUrl": "https://cuescore.com/team/Witchcraft/1176555",
+  "tournamentUrl": "https://cuescore.com/tournament/Pool+Overijssel+Eerste+Klasse+2026%252F2027/83574430",
+  "competition": "Eerste Klasse Overijssel",
+  "standTitle": "Stand Eerste Klasse",
+  "logo": "logo.png",
+  "heroWide": false,
+  "players": [
+    {"id": "1160764", "name": "Jeroen Van Valkenhoef"},
+    {"id": "1160896", "name": "Robère de Groot"},
+    {"id": "1160908", "name": "Roland Zwolsman", "cap": true},
+    {"id": "1160910", "name": "Imre Florijn"}
+  ],
+  "admins": ["1160908"],
+  "adminNames": "de captain",
+  "theme": {
+    "bg": "#100c14", "surface": "#1a1520", "line": "#2e2636", "felt": "#1e1825", "felt-soft": "#2a1834",
+    "fire": "#c98bff", "fire-2": "#ecc8ff", "muted": "#a69bb0", "gk9": "#c98bff"
+  }
+}

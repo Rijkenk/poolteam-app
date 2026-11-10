@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0b0b0c">
+<title>Poolteam-app</title>
+<style>
+:root{--bg:#0b0b0c;--surface:#16171a;--fg:#f2efe9;--muted:#a19a91;--line:#2b2c30;--accent:#ff7a1a;color-scheme:dark}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:560px;margin:0 auto;padding:32px 16px}
+h1{font-size:28px;margin:0 0 4px}p{color:var(--muted);margin:0 0 24px}
+ul{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+a.team{display:flex;align-items:center;gap:14px;padding:12px 14px;border:1px solid var(--line);border-radius:14px;background:var(--surface);color:inherit;text-decoration:none}
+a.team:hover{border-color:var(--accent)}
+a.team img{width:52px;height:52px;object-fit:contain;border-radius:10px;background:#000}
+a.team b{display:block;font-size:17px}a.team small{color:var(--muted)}
+</style>
+</head>
+<body>
+<main>
+  <h1>Poolteam-app</h1>
+  <p>Kies je team. Daar zie je de volgende wedstrijd, geef je je op en zie je de stand.</p>
+  <ul id="teams"></ul>
+</main>
+<script>
+fetch("teams.json",{cache:"no-cache"}).then(r=>r.json()).then(ts=>{
+  const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+  document.getElementById("teams").innerHTML=ts.map(t=>`<li><a class="team" href="${esc(t.slug)}/"><img src="${esc(t.logo)}" alt=""><span><b>${esc(t.name)}</b><small>${esc(t.competition)}</small></span></a></li>`).join("");
+});
+</script>
+</body>
+</html>

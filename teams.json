@@ -1,0 +1,14 @@
+[
+  {
+    "slug": "ballofduty",
+    "name": "Ball of Duty",
+    "competition": "Tweede Klasse Overijssel",
+    "logo": "ballofduty/logo.jpg"
+  },
+  {
+    "slug": "witchcraft",
+    "name": "Witchcraft",
+    "competition": "Eerste Klasse Overijssel",
+    "logo": "witchcraft/logo.png"
+  }
+]

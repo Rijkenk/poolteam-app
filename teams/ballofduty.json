@@ -1,0 +1,25 @@
+{
+  "slug": "ballofduty",
+  "name": "Ball of Duty",
+  "cuescoreTeamId": 62677429,
+  "tournamentId": 83574433,
+  "teamUrl": "https://cuescore.com/team/Ball+of+Duty/62677429",
+  "tournamentUrl": "https://cuescore.com/tournament/Pool+Overijssel+Tweede+Klasse+2026%252F2027/83574433",
+  "competition": "Tweede Klasse Overijssel",
+  "standTitle": "Stand Tweede Klasse",
+  "logo": "logo.jpg",
+  "heroWide": true,
+  "players": [
+    {"id": "1162921", "name": "Kenneth Rijken"},
+    {"id": "1185404", "name": "Vincent Bos"},
+    {"id": "18284026", "name": "Roel Körndörffer"},
+    {"id": "48336892", "name": "Patrick Chirco"},
+    {"id": "62677414", "name": "Laura Gielen", "cap": true},
+    {"id": "62678155", "name": "Marco Oude Middendorp"},
+    {"id": "65125873", "name": "Stefan van der Blij"},
+    {"id": "78493855", "name": "Ross Jelsma"}
+  ],
+  "admins": ["1162921", "62677414"],
+  "adminNames": "de captain en Kenneth",
+  "theme": {}
+}

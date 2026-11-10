@@ -1,0 +1,585 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#0b0b0c">
+<meta name="description" content="Volgende wedstrijd, aanwezigheid en speelvoorkeur voor Ball of Duty.">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png" type="image/png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Ball of Duty">
+<title>Ball of Duty</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600&display=swap">
+<style>
+html{-webkit-text-size-adjust:100%}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}
+
+/* Layout: één smalle kolom, telefoon eerst. Bovenaan de volgende wedstrijd als "scorebord", daaronder jouw opgave, het team en het schema. */
+:root{
+  /* Eén donkere look, afgeleid van het teamlogo: zwart, gunmetal, vuur-oranje */
+  --bg:#0b0b0c; --surface:#16171a; --fg:#f2efe9; --muted:#a19a91; --line:#2b2c30;
+  --felt:#1c1d21; --felt-ink:#ffffff; --felt-soft:#2a1a0e; --fire:#ff7a1a; --fire-2:#ffb23f;
+  --yes:#4cc483; --yes-soft:#15301f; --maybe:#ffb23f; --maybe-soft:#3a2810; --no:#ff5a4e; --no-soft:#3d1714;
+  --g8:#e9e6e0; --g10:#6b95f0; --g141:#ff5a4e; --g9:#ffd23f; --gk9:#ff7a1a;
+  --display:"Barlow Condensed","Arial Narrow",system-ui,sans-serif;
+  --body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:15px;line-height:1.45}
+.wrap{max-width:640px;margin:0 auto;padding-block:20px 48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:20px}
+h1,h2,h3{font-family:var(--display);margin:0;text-wrap:balance;letter-spacing:.01em}
+.top{display:flex;flex-direction:column;gap:12px}
+.hero{border-radius:16px;overflow:hidden;border:1px solid var(--line);aspect-ratio:800/540;max-height:340px;margin-inline:auto;width:100%;background:#000}
+.hero img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.subrow{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.sub{color:var(--muted);font-size:13px}
+.who{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted)}
+select,button{font:inherit;color:inherit}
+select{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:6px 8px}
+:focus-visible{outline:3px solid var(--fire);outline-offset:2px}
+
+/* Scorebord */
+.board{scroll-margin-top:72px;background:linear-gradient(160deg,#25262b,var(--felt) 60%);color:var(--felt-ink);border:1px solid var(--fire);box-shadow:0 0 0 1px rgba(255,122,26,.15),0 10px 40px -18px rgba(255,122,26,.55);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:14px;position:relative;overflow:hidden}
+.board::after{content:"";position:absolute;inset:auto -40px -60px auto;width:180px;height:180px;border-radius:50%;border:2px solid rgba(255,122,26,.18)}
+.eyebrow{color:var(--fire);font-size:12px;text-transform:uppercase;letter-spacing:.12em;opacity:.8;font-weight:600}
+.when{font-family:var(--display);font-size:44px;font-weight:800;line-height:1}
+.when small{display:block;font-size:20px;font-weight:600;opacity:.85;margin-top:4px}
+.vs{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:10px;font-family:var(--display);font-size:22px;font-weight:700;line-height:1.1}
+.vs .us{color:var(--fire-2)}
+.vs .mid{font-size:14px;opacity:.7}
+.vs div:last-child{text-align:right}
+.meta{display:flex;flex-wrap:wrap;gap:8px;font-size:13px}
+.tag{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);border-radius:999px;padding:3px 10px}
+.quorum{border-radius:10px;padding:9px 12px;font-size:13px;position:relative;z-index:1}.quorum.short{background:var(--no-soft);color:var(--fg);border:1px solid var(--no)}.quorum.short b{color:var(--no)}.quorum.ok{background:var(--yes-soft);color:var(--yes);font-weight:600}
+.count{font-size:13px;opacity:.9}
+
+/* Kaarten */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:14px}
+.card h2{font-size:22px}
+.hint{color:var(--muted);font-size:13px;margin:0}
+.seg{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.seg button{border:1.5px solid var(--line);background:transparent;border-radius:10px;padding:12px 6px;font-weight:600;cursor:pointer}
+.seg button[aria-pressed="true"][data-v="ja"]{background:var(--yes-soft);border-color:var(--yes);color:var(--yes)}
+.seg button[aria-pressed="true"][data-v="misschien"]{background:var(--maybe-soft);border-color:var(--maybe);color:var(--maybe)}
+.seg button[aria-pressed="true"][data-v="nee"]{background:var(--no-soft);border-color:var(--no);color:var(--no)}
+.games{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px}
+.game{display:flex;align-items:center;gap:10px;border:1.5px solid var(--line);background:transparent;border-radius:10px;padding:10px 12px;cursor:pointer;text-align:left}
+.game b{font-weight:600;display:block}
+.game small{display:block;color:var(--muted);font-size:11px}
+.game[aria-pressed="true"]{border-color:var(--fire);background:var(--felt-soft)}
+.game:disabled{opacity:.35;cursor:not-allowed}
+.gb{width:26px;height:26px;border-radius:50%;flex:none;display:grid;place-items:center;font:700 10px/1 var(--body);color:#111;background:var(--c)}
+.gb.k{color:#111}
+.need{display:flex;flex-direction:column;gap:8px}
+.need li{list-style:none;display:grid;grid-template-columns:26px 1fr auto;gap:10px;align-items:center}
+.need ul{margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.need li{grid-template-columns:26px 1fr}
+.slots{grid-column:2;display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:6px}
+.slots select{width:100%}
+.warn{margin:0;background:var(--no-soft);color:var(--no);border-radius:10px;padding:9px 12px;font-size:13px;font-weight:600}
+.chip.pref{opacity:.45}
+.game.any .gb{background:var(--line);color:var(--fg)}
+.need .nm{min-width:0;font-size:13px;color:var(--muted)}
+.need .nm b{color:var(--fg);font-weight:600;font-size:14px;display:block}
+.need .st{font-size:12px;font-weight:600;white-space:nowrap}
+.need .st.ok{color:var(--yes)} .need .st.short{color:var(--maybe)}
+.disabled{opacity:.45;pointer-events:none}
+.saved{font-size:12px;color:var(--muted);min-height:1em}
+
+/* Team */
+.team{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.team li{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.team li:first-child{border-top:0}
+.pname{font-weight:500;min-width:0}
+.pname em{font-style:normal;color:var(--muted);font-size:12px;margin-left:6px}
+.right{display:flex;align-items:center;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.pill{font-size:12px;font-weight:600;border-radius:999px;padding:2px 9px;white-space:nowrap}
+.pill.ja{background:var(--yes-soft);color:var(--yes)} .pill.misschien{background:var(--maybe-soft);color:var(--maybe)} .pill.nee{background:var(--no-soft);color:var(--no)} .pill.open{background:var(--bg);color:var(--muted)}
+.chips{display:flex;gap:3px}
+.chip{min-width:22px;height:22px;padding:0 5px;border-radius:999px;display:grid;place-items:center;font-size:10px;font-weight:700;color:#111;background:var(--c)}
+.sum{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
+.sum b{color:var(--fg);font-variant-numeric:tabular-nums}
+
+/* Schema */
+.fix{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.fix button{width:100%;display:grid;grid-template-columns:62px 1fr auto;gap:10px;align-items:center;text-align:left;background:transparent;border:1px solid var(--line);border-radius:10px;padding:9px 12px;cursor:pointer}
+.fix button[aria-current="true"]{border-color:var(--fire);background:var(--felt-soft)}
+.fix .d{font-family:var(--display);font-weight:700;font-size:17px;line-height:1.05}
+.fix .d small{display:block;font-family:var(--body);font-weight:500;font-size:11px;color:var(--muted)}
+.fix .o{min-width:0}
+.fix .o b{font-weight:600}
+.fix .o small{display:block;color:var(--muted);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ha{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.mine{font-size:11px}
+.grp{display:flex;flex-direction:column;gap:8px}.fr{display:flex;gap:6px;align-items:stretch}.fr button{flex:1;min-width:0}.cs{display:grid;place-items:center;width:40px;flex:none;border:1px solid var(--line);border-radius:10px;color:var(--fire);text-decoration:none;font-weight:700}.cs:hover{border-color:var(--fire)}.taglink{color:inherit;text-decoration:none}.taglink:hover{border-color:var(--fire)}
+.tabs{display:grid;grid-template-columns:1fr 1fr;gap:4px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:4px;position:sticky;top:env(safe-area-inset-top,0px);z-index:5}
+.tabs button{border:0;background:transparent;border-radius:9px;padding:10px 8px;font-weight:600;color:var(--muted);cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--fire);color:#160a00}
+.tabpane{display:flex;flex-direction:column;gap:20px}
+.tabpane[hidden]{display:none!important}
+.tblwrap{overflow-x:auto;margin-inline:-4px}
+.tbl{border-collapse:collapse;width:100%;font-size:13px;font-variant-numeric:tabular-nums}
+.tbl th{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:600;text-align:right;padding:6px 4px;border-bottom:1px solid var(--line)}
+.tbl td{text-align:right;padding:8px 4px;border-bottom:1px solid var(--line);white-space:nowrap}
+.tbl th:nth-child(2),.tbl td:nth-child(2){text-align:left}
+.tbl td:nth-child(2){white-space:normal;min-width:96px}
+.tbl td:last-child{font-weight:700}
+.tbl tr.us td{background:var(--felt-soft);color:var(--fire-2);font-weight:600}
+.cslink{color:var(--fire);font-size:13px;text-decoration:none;font-weight:600}
+.res{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.res li{display:grid;grid-template-columns:60px 1fr auto;gap:10px;align-items:center;padding:10px 0;border-top:1px solid var(--line)}
+.res li:first-child{border-top:0}
+.res .d{font-family:var(--display);font-weight:700;font-size:16px;line-height:1.05}
+.res .d small{display:block;font-family:var(--body);font-weight:500;font-size:11px;color:var(--muted)}
+.res .o{min-width:0}.res .o b{font-weight:600;display:block}.res .o small{color:var(--muted);font-size:12px}
+.bigscore{font-family:var(--display);font-weight:800;font-size:22px;color:var(--fg);text-decoration:none;font-variant-numeric:tabular-nums;white-space:nowrap}.bigscore.none{font:500 12px var(--body);color:var(--muted)}.sc{color:var(--fg)}
+.score{display:flex;align-items:center;gap:4px}
+.score input{width:42px;padding:6px 4px;text-align:center;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--fg);font:600 15px var(--body);font-variant-numeric:tabular-nums}
+.score span{color:var(--muted)}
+.wtl{font-size:11px;font-weight:700;border-radius:999px;padding:2px 8px;margin-left:4px}
+.wtl.w{background:var(--yes-soft);color:var(--yes)}.wtl.t{background:var(--maybe-soft);color:var(--maybe)}.wtl.l{background:var(--no-soft);color:var(--no)}
+html{touch-action:manipulation;-webkit-text-size-adjust:100%}
+input,select,textarea{font-size:16px!important}
+.whobox{display:flex;align-items:center;gap:8px;flex-wrap:nowrap;min-width:0}.whobox select{max-width:118px}.whobox .who{white-space:nowrap}
+.loginrow{display:flex;gap:6px;align-items:center}.loginrow input{width:70px;padding:7px 9px;border:1px solid var(--fire);border-radius:8px;background:var(--bg);color:var(--fg);font:600 16px var(--body);letter-spacing:.04em}.loginrow .btn{padding:8px 10px;white-space:nowrap}
+.loggedin{font-size:13px;color:var(--yes);font-weight:600}.loggedin button{background:none;border:0;color:var(--muted);text-decoration:underline;cursor:pointer;font-size:12px;padding:0 0 0 6px}
+.codemsg{flex-basis:100%;margin:0}.codemsg:empty{display:none}
+.btn{border:0;background:var(--fire);color:#160a00;font-weight:700;border-radius:10px;padding:11px 16px;cursor:pointer}
+.coderow{display:flex;gap:8px}.coderow input{flex:1;min-width:0;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--fg);font:inherit}
+.howto{display:grid;gap:14px}.howto h3{font-size:16px;margin-bottom:4px}.howto ol{margin:0;padding-left:20px;color:var(--muted);font-size:14px;display:grid;gap:3px}.howto b{color:var(--fg)}
+#install{scroll-margin-top:72px}
+.installbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 14px;border-radius:12px;border:1px dashed var(--fire);background:var(--felt-soft);color:var(--fg);text-decoration:none}
+.installbar b{display:block;font-weight:600}.installbar small{display:block;color:var(--muted);font-size:12px}
+.installbar .arrow{flex:none;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:var(--fire);color:#160a00;font-weight:800}
+details summary{cursor:pointer;color:var(--muted);font-size:14px;font-family:var(--display);font-weight:700;text-transform:uppercase;letter-spacing:.1em}.grp h3{font-size:14px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}.fix.past button{opacity:.75}
+.notice{background:var(--maybe-soft);color:var(--fg);border-radius:10px;padding:10px 12px;font-size:13px}
+footer{color:var(--muted);font-size:12px;text-align:center}
+footer a{color:inherit}
+@media (max-width:420px){.when{font-size:38px}.vs{font-size:19px}.games{grid-template-columns:1fr 1fr}}
+@media (prefers-reduced-motion:no-preference){.seg button,.fix button{transition:background .15s,border-color .15s}}
+</style>
+<style>
+.hero.tall{aspect-ratio:auto;max-height:none;border:0;background:none;overflow:visible}.hero.tall img{width:auto;height:190px;margin:0 auto;object-fit:contain}</style>
+</head>
+<body>
+
+
+<div class="wrap">
+  <header class="top">
+    <div class="hero"><img src="logo.jpg" alt="Logo Ball of Duty"></div>
+    <h1 class="sr">Ball of Duty</h1>
+    <div class="subrow">
+      <small class="sub" id="sub">Tweede Klasse Overijssel</small>
+      <div class="whobox">
+      <label class="who" for="me">Ik ben
+        <select id="me"><option value="">kies je naam</option></select>
+      </label>
+      <form class="loginrow" id="codecard" hidden>
+        <input id="codein" type="text" inputmode="text" autocomplete="off" autocapitalize="characters" placeholder="code" aria-label="Persoonlijke code">
+        <button type="submit" class="btn">Inloggen</button>
+      </form>
+      <span class="loggedin" id="loggedin" hidden>Ingelogd <button type="button" id="logout">uitloggen</button></span>
+      </div>
+      <p class="hint codemsg" id="codemsg"></p>
+    </div>
+  </header>
+
+  <a class="installbar" id="installbar" href="#install">
+    <span><b>Zet Ball of Duty op je telefoon</b><small>De installatie-instructies staan onderaan deze pagina.</small></span>
+    <span class="arrow" aria-hidden="true">↓</span>
+  </a>
+
+  <nav class="tabs" role="tablist" aria-label="Onderdelen">
+    <button type="button" role="tab" id="tab-btn-wedstrijd" data-tab="wedstrijd" aria-selected="true">Wedstrijd</button>
+    <button type="button" role="tab" id="tab-btn-stand" data-tab="stand" aria-selected="false">Stand &amp; uitslagen</button>
+  </nav>
+
+  <div class="tabpane" id="tab-wedstrijd">
+
+  <section class="board" id="board" aria-live="polite"></section>
+
+  <div class="notice" id="dbnote" hidden></div>
+
+
+  <section class="card" id="mycard">
+    <div>
+      <h2 id="mytitle">Jouw opgave</h2>
+      <p class="hint" id="myhint">Kies eerst bovenaan je naam.</p>
+    </div>
+    <div class="seg" role="group" aria-label="Aanwezigheid" id="seg">
+      <button type="button" id="st-ja" data-v="ja" aria-pressed="false">Ik ben erbij</button>
+      <button type="button" id="st-misschien" data-v="misschien" aria-pressed="false">Misschien</button>
+      <button type="button" id="st-nee" data-v="nee" aria-pressed="false">Ik kan niet</button>
+    </div>
+    <div>
+      <p class="hint" style="margin-bottom:8px">Wat wil je spelen? Kies zoveel als je wilt, of geen voorkeur. In het wedstrijdformulier wordt daarna de opstelling gemaakt.</p>
+      <div class="games" id="games" role="group" aria-label="Speelvoorkeur"></div>
+    </div>
+    <div class="saved" id="saved"></div>
+  </section>
+
+  <section class="card">
+    <div><h2>Wie speelt er</h2><p class="hint" id="teamhint"></p></div>
+    <div class="sum" id="sum"></div>
+    <ul class="team" id="team"></ul>
+  </section>
+
+  <section class="card">
+    <div><h2>Wedstrijdformulier</h2><p class="hint">Kies per partij wie er speelt. ★ = wil dit graag spelen. Iedereen speelt maximaal 2 enkelpartijen; koppel telt niet mee. De captain en Kenneth maken de opstelling.</p></div>
+    <div class="need"><ul id="need"></ul></div>
+    <p class="hint" id="lineupwho"></p>
+    <p class="warn" id="lineupwarn" hidden></p>
+    <div class="saved" id="lineupsaved"></div>
+  </section>
+
+  <section class="card">
+    <div><h2>Schema</h2><p class="hint">Tik op een wedstrijd om je opgave daarvoor te doen.</p></div>
+    <details class="grp"><summary id="pastsum">Gespeeld</summary><ul class="fix past" id="past" style="margin-top:8px"></ul></details>
+    <div class="grp"><h3>Komend</h3><ul class="fix" id="fix"></ul></div>
+  </section>
+
+    <section class="card" id="install">
+      <div><h2>Zet de app op je telefoon</h2><p class="hint">Dan open je Ball of Duty met één tik vanaf je beginscherm, net als een gewone app.</p></div>
+      <button type="button" class="btn" id="installbtn" hidden>Installeer de app</button>
+      <div class="howto">
+        <div><h3>iPhone of iPad (Safari)</h3><ol><li>Open deze pagina in <b>Safari</b> zelf. Kwam je via een link in WhatsApp of mail? Kies dan eerst <b>Open in Safari</b>, want in dat tussenscherm ontbreekt de optie.</li><li>Tik op de deelknop (vierkantje met pijl omhoog). Zie je die niet, tik dan eerst op <b>•••</b> rechtsonder en daarna op <b>Deel</b>.</li><li>Scrol in het menu omlaag, kies <b>Zet op beginscherm</b> en tik op <b>Voeg toe</b>.</li></ol></div>
+        <div><h3>Android (Chrome)</h3><ol><li>Open deze pagina in <b>Chrome</b>.</li><li>Tik op <b>Installeer de app</b> hierboven, of op het menu (drie puntjes).</li><li>Kies <b>App installeren</b> of <b>Toevoegen aan startscherm</b>.</li></ol></div>
+        <div><h3>Computer (Chrome of Edge)</h3><ol><li>Klik op het installatie-icoon rechts in de adresbalk.</li><li>Kies <b>Installeren</b>.</li></ol></div>
+      </div>
+    </section>
+  </div>
+
+  <div class="tabpane" id="tab-stand" hidden>
+    <section class="card">
+      <div><h2>Onze uitslagen</h2><p class="hint" id="reshint">Automatisch van CueScore. Tik op een uitslag voor de details.</p></div>
+      <div class="sum" id="ressum"></div>
+      <ul class="res" id="res"></ul>
+    </section>
+    <section class="card">
+      <div><h2>Stand Tweede Klasse</h2><p class="hint" id="standhint">Van CueScore.</p></div>
+      <div class="tblwrap"><table class="tbl" id="tbl"></table></div>
+      <a class="cslink" href="https://cuescore.com/tournament/Pool+Overijssel+Tweede+Klasse+2026%252F2027/83574433" target="_blank" rel="noopener">Actuele stand op CueScore ↗</a>
+    </section>
+  </div>
+
+  <footer id="foot">Schema, uitslagen en stand komen van <a href="https://cuescore.com/team/Ball+of+Duty/62677429" target="_blank" rel="noopener">CueScore</a>.</footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script src="../config.js?v=4"></script>
+<script>window.TEAM={"slug":"ballofduty","name":"Ball of Duty","cuescoreTeamId":62677429,"tournamentId":83574433,"teamUrl":"https://cuescore.com/team/Ball+of+Duty/62677429","tournamentUrl":"https://cuescore.com/tournament/Pool+Overijssel+Tweede+Klasse+2026%252F2027/83574433","competition":"Tweede Klasse Overijssel","standTitle":"Stand Tweede Klasse","logo":"logo.jpg","heroWide":true,"players":[{"id":"1162921","name":"Kenneth Rijken"},{"id":"1185404","name":"Vincent Bos"},{"id":"18284026","name":"Roel Körndörffer"},{"id":"48336892","name":"Patrick Chirco"},{"id":"62677414","name":"Laura Gielen","cap":true},{"id":"62678155","name":"Marco Oude Middendorp"},{"id":"65125873","name":"Stefan van der Blij"},{"id":"78493855","name":"Ross Jelsma"}],"admins":["1162921","62677414"],"adminNames":"de captain en Kenneth","theme":{},"cs":{"updated":"2026-11-10T14:48:14Z","standings":[{"pos":1,"name":"Sjoel Shooters","played":7,"wins":6,"ties":0,"losses":1,"fw":30,"fl":12,"pts":36},{"pos":2,"name":"De Ballen verstand","played":7,"wins":5,"ties":1,"losses":1,"fw":29,"fl":13,"pts":34},{"pos":3,"name":"Cueflitz","played":7,"wins":5,"ties":2,"losses":0,"fw":27,"fl":15,"pts":32},{"pos":4,"name":"'T stek ons niks","played":7,"wins":3,"ties":2,"losses":2,"fw":22,"fl":20,"pts":25},{"pos":5,"name":"BallBreakers","played":6,"wins":4,"ties":0,"losses":2,"fw":21,"fl":15,"pts":25},{"pos":6,"name":"The Cue Crusaders","played":6,"wins":2,"ties":3,"losses":1,"fw":21,"fl":15,"pts":23},{"pos":7,"name":"De gedraaide ballen","played":6,"wins":2,"ties":2,"losses":2,"fw":20,"fl":16,"pts":22},{"pos":7,"name":"Het Fundament Der Synagoge","played":7,"wins":2,"ties":1,"losses":4,"fw":20,"fl":22,"pts":22},{"pos":9,"name":"The Pooligans","played":7,"wins":2,"ties":1,"losses":4,"fw":18,"fl":24,"pts":20},{"pos":10,"name":"Ball of Duty","played":7,"wins":2,"ties":1,"losses":4,"fw":17,"fl":25,"pts":19},{"pos":11,"name":"Sjoel98","played":6,"wins":1,"ties":2,"losses":3,"fw":16,"fl":20,"pts":17},{"pos":12,"name":"Pocket Hunters","played":7,"wins":2,"ties":1,"losses":4,"fw":14,"fl":28,"pts":16},{"pos":12,"name":"De Sjoeligans","played":6,"wins":2,"ties":0,"losses":4,"fw":14,"fl":22,"pts":16},{"pos":14,"name":"De 6 Muskebiers","played":6,"wins":0,"ties":0,"losses":6,"fw":7,"fl":29,"pts":7}],"matches":[{"no":7,"round":1,"start":"2026-09-14T18:00:00Z","home":"The Pooligans","away":"Ball of Duty","venue":"Snooker-En Poolcentrum Hengelo","sa":4,"sb":2,"status":"finished","url":"https://cuescore.com/match/?matchId=88317487"},{"no":8,"round":2,"start":"2026-09-23T18:00:00Z","home":"De 6 Muskebiers","away":"Ball of Duty","venue":"Poolcentrum de Sjoel","sa":2,"sb":4,"status":"finished","url":"https://cuescore.com/match/?matchId=88317490"},{"no":21,"round":3,"start":"2026-09-28T18:00:00Z","home":"Ball of Duty","away":"Het Fundament Der Synagoge","venue":"Snooker & Pool Centrum Hengelo","sa":4,"sb":2,"status":"finished","url":"https://cuescore.com/match/?matchId=88317529"},{"no":23,"round":4,"start":"2026-10-05T18:00:00Z","home":"Pocket Hunters","away":"Ball of Duty","venue":"Snooker-En Poolcentrum Hengelo","sa":4,"sb":2,"status":"finished","url":"https://cuescore.com/match/?matchId=88317535"},{"no":34,"round":5,"start":"2026-10-19T18:00:00Z","home":"Ball of Duty","away":"Sjoel Shooters","venue":"Snooker & Pool Centrum Hengelo","sa":1,"sb":5,"status":"finished","url":"https://cuescore.com/match/?matchId=88317568"},{"no":38,"round":6,"start":"2026-10-27T19:00:00Z","home":"Cueflitz","away":"Ball of Duty","venue":"Snooker-En Poolcentrum Hengelo","sa":3,"sb":3,"status":"finished","url":"https://cuescore.com/match/?matchId=88317580"},{"no":47,"round":7,"start":"2026-11-09T19:00:00Z","home":"Ball of Duty","away":"'T stek ons niks","venue":"Snooker & Pool Centrum Hengelo","sa":1,"sb":5,"status":"finished","url":"https://cuescore.com/match/?matchId=88317607"},{"no":53,"round":8,"start":"2026-11-16T19:00:00Z","home":"De Ballen verstand","away":"Ball of Duty","venue":"Snooker-En Poolcentrum Hengelo","sa":0,"sb":0,"status":"waiting","url":"https://cuescore.com/match/?matchId=88317625"},{"no":60,"round":9,"start":"2026-11-30T19:00:00Z","home":"Ball of Duty","away":"De Sjoeligans","venue":"Snooker & Pool Centrum Hengelo","sa":0,"sb":0,"status":"waiting","url":"https://cuescore.com/match/?matchId=88317646"},{"no":68,"round":10,"start":"2026-12-07T19:00:00Z","home":"De gedraaide ballen","away":"Ball of Duty","venue":"Snooker & Pool Centrum Hengelo","sa":0,"sb":0,"status":"waiting","url":"https://cuescore.com/match/?matchId=88317670"},{"no":73,"round":11,"start":"2026-12-14T19:00:00Z","home":"Ball of Duty","away":"Sjoel98","venue":"Snooker & Pool Centrum Hengelo","sa":0,"sb":0,"status":"waiting","url":"https://cuescore.com/match/?matchId=88317685"},{"no":83,"round":12,"start":"2027-01-05T19:00:00Z","home":"BallBreakers","away":"Ball of Duty","venue":"Poolcentrum de Sjoel","sa":0,"sb":0,"status":"waiting","url":"https://cuescore.com/match/?matchId=88317715"},{"no":86,"round":13,"start":"2027-01-11T19:00:00Z","home":"Ball of Duty","away":"The Cue Crusaders","venue":"Snooker & Pool Centrum Hengelo","sa":0,"sb":0,"status":"waiting","url":"https://cuescore.com/match/?matchId=88317724"},{"no":98,"round":14,"start":"2027-01-18T19:00:00Z","home":"Ball of Duty","away":"The Pooligans","venue":"Snooker & Pool Centrum Hengelo","sa":0,"sb":0,"status":"waiting","url":"https://cuescore.com/match/?matchId=88317760"},{"no":99,"round":15,"start":"2027-02-01T19:00:00Z","home":"Ball of Duty","away":"De 6 Muskebiers","venue":"Snooker & Pool Centrum Hengelo","sa":0,"sb":0,"status":"waiting","url":"https://cuescore.com/match/?matchId=88317763"},{"no":112,"round":16,"start":"2027-02-08T19:00:00Z","home":"Het Fundament Der Synagoge","away":"Ball of Duty","venue":"Poolcentrum de Sjoel","sa":0,"sb":0,"status":"waiting","url":"https://cuescore.com/match/?matchId=88317802"},{"no":114,"round":17,"start":"2027-02-15T19:00:00Z","home":"Ball of Duty","away":"Pocket Hunters","venue":"Snooker & Pool Centrum Hengelo","sa":0,"sb":0,"status":"waiting","url":"https://cuescore.com/match/?matchId=88317808"},{"no":125,"round":18,"start":"2027-03-02T19:00:00Z","home":"Sjoel Shooters","away":"Ball of Duty","venue":"Poolcentrum de Sjoel","sa":0,"sb":0,"status":"waiting","url":"https://cuescore.com/match/?matchId=88317841"},{"no":129,"round":19,"start":"2027-03-08T19:00:00Z","home":"Ball of Duty","away":"Cueflitz","venue":"Snooker & Pool Centrum Hengelo","sa":0,"sb":0,"status":"waiting","url":"https://cuescore.com/match/?matchId=88317853"},{"no":138,"round":20,"start":"2027-03-23T19:00:00Z","home":"'T stek ons niks","away":"Ball of Duty","venue":"Snooker & Pool Centrum Hengelo","sa":0,"sb":0,"status":"waiting","url":"https://cuescore.com/match/?matchId=88317880"},{"no":144,"round":21,"start":"2027-04-05T18:00:00Z","home":"Ball of Duty","away":"De Ballen verstand","venue":"Snooker & Pool Centrum Hengelo","sa":0,"sb":0,"status":"waiting","url":"https://cuescore.com/match/?matchId=88317898"},{"no":151,"round":22,"start":"2027-04-12T18:00:00Z","home":"De Sjoeligans","away":"Ball of Duty","venue":"Poolcentrum de Sjoel","sa":0,"sb":0,"status":"waiting","url":"https://cuescore.com/match/?matchId=88317919"},{"no":159,"round":23,"start":"2027-04-19T18:00:00Z","home":"Ball of Duty","away":"De gedraaide ballen","venue":"Snooker & Pool Centrum Hengelo","sa":0,"sb":0,"status":"waiting","url":"https://cuescore.com/match/?matchId=88317943"},{"no":164,"round":24,"start":"2027-05-11T18:00:00Z","home":"Sjoel98","away":"Ball of Duty","venue":"Poolcentrum de Sjoel","sa":0,"sb":0,"status":"waiting","url":"https://cuescore.com/match/?matchId=88317958"},{"no":174,"round":25,"start":"2027-05-24T18:00:00Z","home":"Ball of Duty","away":"BallBreakers","venue":"Snooker & Pool Centrum Hengelo","sa":0,"sb":0,"status":"waiting","url":"https://cuescore.com/match/?matchId=88317988"},{"no":177,"round":26,"start":"2027-06-01T18:00:00Z","home":"The Cue Crusaders","away":"Ball of Duty","venue":"Snooker & Pool Centrum Hengelo","sa":0,"sb":0,"status":"waiting","url":"https://cuescore.com/match/?matchId=88317997"}]}};</script>
+</div>
+
+<script>
+const T=window.TEAM;
+const PLAYERS=T.players;
+const US=T.name;
+const GAMES=[
+ {k:"8b",n:"8-ball",lab:"8",spots:2,sub:"2 partijen",c:"var(--g8)"},
+ {k:"10b",n:"10-ball",lab:"10",spots:1,sub:"1 partij",c:"var(--g10)"},
+ {k:"141",n:"Straight pool",lab:"14.1",spots:1,sub:"1 partij",c:"var(--g141)"},
+ {k:"9b",n:"9-ball",lab:"9",spots:1,sub:"1 partij",c:"var(--g9)"},
+ {k:"k9b",n:"Koppel 9-ball",lab:"K9",spots:2,sub:"koppel, 2 spelers",c:"var(--gk9)"}];
+const MAXP=2;
+const MIN_SPELERS=3;
+const fmtDeadline=new Intl.DateTimeFormat("nl-NL",{weekday:"long",day:"numeric",month:"long",hour:"2-digit",minute:"2-digit"});
+const SLOTS=[["8b-1","8b"],["8b-2","8b"],["10b","10b"],["141","141"],["9b","9b"],["k9b-1","k9b"],["k9b-2","k9b"]];
+const ADMINS=T.admins;
+let lineups={}; // matchNo -> {slots:{slotKey:playerId}}
+const CS=T.tournamentUrl;
+const solo=prefs=>prefs.filter(k=>k!=="k9b").length;
+let MATCHES=[];
+
+const $=id=>document.getElementById(id);
+const fmtDay=new Intl.DateTimeFormat("nl-NL",{weekday:"long",day:"numeric",month:"long"});
+const fmtShort=new Intl.DateTimeFormat("nl-NL",{day:"numeric",month:"short"});
+const fmtWd=new Intl.DateTimeFormat("nl-NL",{weekday:"short"});
+const fmtTime=new Intl.DateTimeFormat("nl-NL",{hour:"2-digit",minute:"2-digit"});
+const first=n=>n.split(" ")[0];
+const store={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+
+const now=new Date();
+let upcoming=[],past=[],nextMatch=null,selected=null;
+const isDone=m=>m.status==="finished"||(m.status===undefined&&m.date.getTime()+4*3600e3<=now.getTime());
+function splitMatches(){
+  upcoming=MATCHES.filter(m=>!isDone(m));past=MATCHES.filter(isDone);nextMatch=upcoming[0]||null;
+  selected=(selected&&MATCHES.find(m=>m.no===selected.no))||nextMatch||MATCHES[MATCHES.length-1];
+}
+splitMatches();
+let csUpdated="";
+let me=store.get(T.slug+"-me")||"";
+let entries={}; // key `${no}_${player}` -> data
+let db=null, dbReady=false;
+let auth=null;try{auth=JSON.parse(store.get(T.slug+"-auth")||"null")}catch(e){auth=null}
+let teamCode="";
+function syncAuth(){teamCode=auth&&auth.player===me?auth.code:""}
+syncAuth();
+let results={}; // matchNo -> {ons,tegen}
+let STAND=[];
+const PARTIJEN=6;
+
+function key(no,p){return no+"_"+p}
+function entry(no,p){return entries[key(no,p)]||null}
+
+function daysUntil(d){const a=new Date(now.getFullYear(),now.getMonth(),now.getDate());const b=new Date(d.getFullYear(),d.getMonth(),d.getDate());return Math.round((b-a)/864e5)}
+function relDay(d){const n=daysUntil(d);if(n===0)return"vanavond";if(n===1)return"morgen";if(n<0)return"gespeeld";return"over "+n+" dagen"}
+
+function renderBoard(){
+  const m=selected, isNext=m===nextMatch;
+  const yes=PLAYERS.filter(p=>entry(m.no,p.id)?.status==="ja").length;
+  const home=m.thuis?`<div class="us">${US}</div>`:`<div>${esc(m.home)}</div>`;
+  const away=m.thuis?`<div>${esc(m.away)}</div>`:`<div class="us">${US}</div>`;
+  $("board").innerHTML=`
+    <div class="eyebrow">${isNext?"Volgende wedstrijd":(m.date<now?"Gespeelde wedstrijd":"Geselecteerde wedstrijd")} · ronde ${m.round}</div>
+    <div class="when">${cap(fmtDay.format(m.date))}<small>${fmtTime.format(m.date)} · ${relDay(m.date)}</small></div>
+    <div class="vs">${home}<div class="mid">tegen</div>${away}</div>
+    <div class="meta"><span class="tag">${m.thuis?"Thuis":"Uit"}</span><span class="tag">${esc(m.venue)}</span><a class="tag taglink" href="${m.url||CS}" target="_blank" rel="noopener">Wedstrijd ${m.no} op CueScore ↗</a></div>
+    <div class="count">${dbReady?`${yes} van ${PLAYERS.length} spelers hebben zich aangemeld`:"Opgaves laden…"}</div>
+    ${dbReady&&m.date>now?(yes<MIN_SPELERS?`<div class="quorum short"><b>Nog ${MIN_SPELERS-yes} ${MIN_SPELERS-yes===1?"speler":"spelers"} nodig.</b> Met minder dan ${MIN_SPELERS} spelers gaat de wedstrijd niet door.${m.date-now>72*3600e3?` Is het ${fmtDeadline.format(new Date(m.date-72*3600e3))} nog niet genoeg, dan krijgt de captain een melding.`:""}</div>`:`<div class="quorum ok">Genoeg spelers, de wedstrijd gaat door.</div>`):""}`;
+}
+function cap(s){return s.charAt(0).toUpperCase()+s.slice(1)}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+
+function renderMine(){
+  const m=selected, e=me?entry(m.no,me):null;
+  const st=e?.status||"", prefs=e?.prefs||[];
+  const enabled=!!me&&!!db&&!!teamCode;
+  $("codecard").hidden=!(me&&db&&!teamCode);$("loggedin").hidden=!(me&&teamCode);
+  $("mytitle").textContent=me?`Jouw opgave, ${first(PLAYERS.find(p=>p.id===me)?.name||"")}`:"Jouw opgave";
+  $("myhint").textContent=!me?"Kies eerst bovenaan je naam.":!db?(dbReady?"Opslaan lukt nu niet. Controleer je verbinding.":"Even geduld, opgaves laden…"):!teamCode?"Vul bovenaan eerst je persoonlijke code in.":`Voor ${fmtDay.format(m.date)} tegen ${m.opp}. Je kunt dit altijd aanpassen.`;
+  for(const v of["ja","misschien","nee"]){$("st-"+v).setAttribute("aria-pressed",String(st===v))}
+  $("seg").classList.toggle("disabled",!enabled);
+  const prefOn=enabled&&st!=="nee";
+  $("games").classList.toggle("disabled",!prefOn);
+  $("games").innerHTML=GAMES.map(g=>{const on=prefs.includes(g.k);
+    return `<button type="button" class="game" id="g-${g.k}" data-k="${g.k}" aria-pressed="${on}"><span class="gb" style="--c:${g.c}">${g.lab}</span><span><b>${g.n}</b><small>${g.sub}</small></span></button>`}).join("")+
+    `<button type="button" class="game any" id="g-any" data-k="any" aria-pressed="${prefs.includes("any")}"><span class="gb">?</span><span><b>Geen voorkeur</b><small>alles is goed</small></span></button>`;
+}
+
+function renderTeam(){
+  const m=selected;let ja=0,mis=0,nee=0;
+  const order={ja:0,misschien:1,"":2,nee:3};
+  const rows=PLAYERS.map(p=>({p,e:entry(m.no,p.id)})).sort((a,b)=>(order[a.e?.status||""]-order[b.e?.status||""])||a.p.name.localeCompare(b.p.name));
+  $("team").innerHTML=rows.map(({p,e})=>{
+    const s=e?.status||"";if(s==="ja")ja++;if(s==="misschien")mis++;if(s==="nee")nee++;
+    const asg=assigned(m.no,p.id);
+    const chips=s==="nee"&&!asg.length?"":"<span class=\"chips\">"+(asg.length?asg.map(k=>GAMES.find(g=>g.k===k)).map(g=>`<span class="chip" style="--c:${g.c}" title="Speelt ${g.n}">${g.lab}</span>`).join(""):(e?.prefs||[]).includes("any")?'<span class="chip pref" style="--c:var(--line)" title="Geen voorkeur">?</span>':(e?.prefs||[]).map(k=>GAMES.find(g=>g.k===k)).filter(Boolean).map(g=>`<span class="chip pref" style="--c:${g.c}" title="Voorkeur ${g.n}">${g.lab}</span>`).join(""))+"</span>";
+    const label={ja:"Erbij",misschien:"Misschien",nee:"Kan niet","":"Nog niet opgegeven"}[s];
+    return `<li><span class="pname">${esc(p.name)}${p.cap?"<em>captain</em>":""}${p.id===me?"<em>jij</em>":""}</span><span class="right">${chips}<span class="pill ${s||"open"}">${label}</span></span></li>`;
+  }).join("");
+  $("sum").innerHTML=`<span><b>${ja}</b> erbij</span><span><b>${mis}</b> misschien</span><span><b>${nee}</b> kan niet</span><span><b>${PLAYERS.length-ja-mis-nee}</b> open</span>`;
+  renderLineup();
+  $("teamhint").textContent=`${cap(fmtDay.format(m.date))} tegen ${m.opp}`;
+}
+
+function scoreTxt(m){return Number.isFinite(m.sa)&&Number.isFinite(m.sb)&&m.status==="finished"?`${m.sa}–${m.sb}`:""}
+function lineupWritable(){return !!db&&!!teamCode&&!!auth?.admin}
+function assigned(no,pid){const sl=lineups[no]?.slots||{};return SLOTS.filter(([k])=>sl[k]===pid).map(([,g])=>g)}
+function renderLineup(){
+  const m=selected, sl=lineups[m.no]?.slots||{};
+  const avail=PLAYERS.map(p=>({p,e:entry(m.no,p.id)})).filter(({e})=>e&&(e.status==="ja"||e.status==="misschien"));
+  const canEdit=lineupWritable();
+  const ae=document.activeElement, focusId=ae&&ae.id;
+  $("need").innerHTML=GAMES.map(g=>{
+    const want=avail.filter(({e})=>(e.prefs||[]).includes(g.k));
+    const names=want.map(({p,e})=>first(p.name)+(e.status==="misschien"?" (?)":"")).join(", ")||"nog niemand";
+    const sels=SLOTS.filter(([,gk])=>gk===g.k).map(([k])=>{
+      const cur=sl[k]||"";
+      const opts=[...avail].sort((a,b)=>(want.includes(b)-want.includes(a))||((a.e.status==="ja"?0:1)-(b.e.status==="ja"?0:1))||a.p.name.localeCompare(b.p.name));
+      const curMissing=cur&&!opts.some(o=>o.p.id===cur);
+      return `<select id="ls-${k}" data-slot="${k}" aria-label="${g.n} speler" ${canEdit?"":"disabled"}><option value="">— kies speler —</option>${curMissing?`<option value="${cur}" selected>${esc(PLAYERS.find(p=>p.id===cur)?.name||"?")} (afgemeld)</option>`:""}${opts.map(({p,e})=>`<option value="${p.id}" ${p.id===cur?"selected":""}>${want.some(w=>w.p.id===p.id)?"★ ":""}${esc(p.name)}${e.status==="misschien"?" (?)":""}</option>`).join("")}</select>`}).join("");
+    return `<li><span class="gb" style="--c:${g.c}">${g.lab}</span><span class="nm"><b>${g.n}</b>Willen: ${esc(names)}</span><div class="slots">${sels}</div></li>`}).join("");
+  if(focusId&&$(focusId))$(focusId).focus();
+  const isAdmin=ADMINS.includes(me);
+  $("lineupwho").textContent=!isAdmin?`Alleen ${T.adminNames} ${T.admins.length>1?"stellen":"stelt"} de opstelling samen.`:!teamCode?"Log eerst in met je code om de opstelling te maken.":"Jij kunt de opstelling aanpassen.";
+  // controles
+  const warns=[];
+  for(const p of PLAYERS){const a=assigned(m.no,p.id);const solo=a.filter(k=>k!=="k9b").length;
+    if(solo>2)warns.push(`${first(p.name)} staat bij ${solo} enkelpartijen (max 2).`);
+    if(a.filter(k=>k==="k9b").length>1)warns.push(`${first(p.name)} staat twee keer bij koppel.`);
+    if(a.filter(k=>k==="8b").length>1)warns.push(`${first(p.name)} staat twee keer bij 8-ball.`);}
+  const filled=SLOTS.filter(([k])=>sl[k]).length;
+  $("lineupwarn").hidden=!warns.length;$("lineupwarn").textContent=warns.join(" ");
+  if(!$("lineupsaved").dataset.busy)$("lineupsaved").textContent=`${filled} van ${SLOTS.length} plekken ingevuld.`;
+}
+function fixRow(m){
+  const e=me?entry(m.no,me):null;
+  const mine=e?.status?`<span class="pill ${e.status} mine">${{ja:"Erbij",misschien:"Misschien",nee:"Kan niet"}[e.status]}</span>`:"";
+  return `<li class="fr"><button type="button" data-no="${m.no}" aria-current="${m===selected}">
+    <span class="d">${fmtShort.format(m.date)}<small>${fmtWd.format(m.date)} ${fmtTime.format(m.date)}</small></span>
+    <span class="o"><b>${esc(m.opp)}</b><small><span class="ha">${m.thuis?"Thuis":"Uit"}</span>${scoreTxt(m)?` · <b class="sc">${scoreTxt(m)}</b>`:""} · ${esc(m.venue)}</small></span>
+    ${mine}</button><a class="cs" href="${m.url||CS}" target="_blank" rel="noopener" aria-label="Wedstrijd ${m.no} op CueScore" title="Bekijk op CueScore">↗</a></li>`;
+}
+function renderFix(){
+  $("fix").innerHTML=upcoming.map(fixRow).join("")||"<li class=\"hint\">Geen wedstrijden meer dit seizoen.</li>";
+  $("past").innerHTML=past.map(fixRow).join("");
+  $("pastsum").textContent=`Gespeeld (${past.length})`;
+}
+function renderStand(){
+  $("tbl").innerHTML=`<thead><tr><th>#</th><th>Team</th><th title="Gespeeld">G</th><th title="Gewonnen">W</th><th title="Gelijk">G</th><th title="Verloren">V</th><th title="Partijen voor-tegen">Partijen</th><th title="Punten">Pnt</th></tr></thead><tbody>`+
+   STAND.map(([pos,n,g,w,t,l,ws,ls,pts])=>`<tr class="${n===US?"us":""}"><td>${pos}</td><td>${esc(n)}</td><td>${g}</td><td>${w}</td><td>${t}</td><td>${l}</td><td>${ws}-${ls}</td><td>${pts}</td></tr>`).join("")+"</tbody>";
+}
+function renderResults(){
+  const list=MATCHES.filter(isDone);
+  let w=0,t=0,l=0,fw=0,fl=0;
+  $("res").innerHTML=list.map(m=>{
+    const has=Number.isFinite(m.sa)&&Number.isFinite(m.sb)&&m.status==="finished";let tag="",sc="nog geen uitslag";
+    if(has){const ons=m.thuis?m.sa:m.sb,tegen=m.thuis?m.sb:m.sa;fw+=ons;fl+=tegen;sc=`${m.sa}–${m.sb}`;
+      if(ons>tegen){w++;tag='<span class="wtl w">W</span>'}else if(ons<tegen){l++;tag='<span class="wtl l">V</span>'}else{t++;tag='<span class="wtl t">G</span>'}}
+    return `<li><span class="d">${fmtShort.format(m.date)}<small>ronde ${m.round}</small></span>
+      <span class="o"><b>${esc(m.home)} – ${esc(m.away)}</b><small>${m.thuis?"Thuis":"Uit"}</small>${tag}</span>
+      <a class="bigscore${has?"":" none"}" href="${m.url||CS}" target="_blank" rel="noopener">${sc}</a></li>`}).reverse().join("")||'<li class="hint">Nog geen gespeelde wedstrijden.</li>';
+  $("ressum").innerHTML=`<span><b>${w}</b> gewonnen</span><span><b>${t}</b> gelijk</span><span><b>${l}</b> verloren</span><span>Partijen <b>${fw}-${fl}</b></span>`;
+}
+function renderAll(){if(!selected)return;renderBoard();renderMine();renderTeam();renderFix();renderStand();renderResults()}
+
+// Spelerkeuze
+for(const p of PLAYERS){const o=document.createElement("option");o.value=p.id;o.textContent=p.name;$("me").appendChild(o)}
+$("me").value=me;
+$("me").addEventListener("change",e=>{me=e.target.value;store.set(T.slug+"-me",me);syncAuth();$("codemsg").textContent="";renderAll()});
+
+function onPick(e){const b=e.target.closest("button[data-no]");if(!b)return;selected=MATCHES.find(m=>m.no===+b.dataset.no);renderAll();$("board").scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"start"})}
+$("fix").addEventListener("click",onPick);$("past").addEventListener("click",onPick);
+
+// Opslaan
+let saving=Promise.resolve();
+function save(patch){
+  if(!db||!me||!teamCode)return;
+  const m=selected, k=key(m.no,me), cur=entries[k]||{match:m.no,player:me,status:"",prefs:[]};
+  const next={...cur,...patch,match:m.no,player:me,updatedAt:new Date().toISOString()};
+  if(next.status==="nee"){next.prefs=[]}
+  entries[k]=next;renderAll();
+  $("saved").textContent="Opslaan…";
+  saving=saving.then(()=>db.collection("opgaves").doc(k).set(next)).then(()=>{$("saved").textContent="Opgeslagen"},err=>{$("saved").textContent="Niet opgeslagen: "+(err?.code==="bad_code"?"je code klopt niet. Log opnieuw in.":"probeer het opnieuw.");if(err?.code==="bad_code")forgetCode()});
+}
+document.querySelectorAll("#seg button").forEach(b=>b.addEventListener("click",()=>{
+  const e=entry(selected.no,me);const v=b.dataset.v;save({status:e?.status===v?"":v})}));
+$("games").addEventListener("click",ev=>{const b=ev.target.closest("button[data-k]");if(!b||b.disabled)return;
+  const e=entry(selected.no,me)||{};let prefs=[...(e.prefs||[])];const k=b.dataset.k;
+  if(prefs.includes(k))prefs=prefs.filter(x=>x!==k);else if(k==="any")prefs=["any"];else prefs=[...prefs.filter(x=>x!=="any"),k];
+  const patch={prefs};if(!e.status)patch.status="ja";save(patch)});
+
+let adminWrite=false;
+
+$("need").addEventListener("change",ev=>{
+  const sel=ev.target.closest("select[data-slot]");if(!sel||!lineupWritable())return;
+  const no=selected.no;const slots={...(lineups[no]?.slots||{})};
+  if(sel.value)slots[sel.dataset.slot]=sel.value;else delete slots[sel.dataset.slot];
+  lineups[no]={slots};renderTeam();
+  const el=$("lineupsaved");el.dataset.busy="1";el.textContent="Opstelling opslaan…";
+  adminWrite=true;db.collection("opstelling").doc(String(no)).set({match:no,slots,updatedAt:new Date().toISOString()})
+    .then(()=>{delete el.dataset.busy;el.textContent="Opstelling opgeslagen"},err=>{delete el.dataset.busy;el.textContent="Opstelling niet opgeslagen: "+(err?.code==="bad_code"?"je code klopt niet.":"probeer het opnieuw.");if(err?.code==="bad_code")forgetCode()});
+});
+
+function showTab(name){
+  for(const t of["wedstrijd","stand"]){$("tab-"+t).hidden=t!==name;$("tab-btn-"+t).setAttribute("aria-selected",String(t===name))}
+}
+document.querySelectorAll(".tabs button").forEach(b=>b.addEventListener("click",()=>{showTab(b.dataset.tab);try{history.replaceState(null,"",b.dataset.tab==="stand"?"#stand":"#")}catch(e){location.hash=b.dataset.tab==="stand"?"stand":""}}));
+window.addEventListener("hashchange",()=>showTab(location.hash==="#stand"?"stand":"wedstrijd"));
+showTab(location.hash==="#stand"?"stand":"wedstrijd");
+
+
+if(T.cs)applyCs(T.cs);else renderAll();
+
+// CueScore: eerst rechtstreeks, anders het bestand dat GitHub elk uur bijwerkt
+const TEAM_ID=T.cuescoreTeamId, TOURNAMENT_ID=T.tournamentId;
+function fromApi(j){
+  const rows=[...(j.standings?.["1"]||[])];
+  const ms=[...(j.matches||[])].filter(m=>m.playerA?.teamId==TEAM_ID||m.playerB?.teamId==TEAM_ID);
+  return{updated:new Date().toISOString(),
+    standings:rows.map(r=>({pos:r.position,name:r.player?.name,played:r.played,wins:r.wins,ties:r.ties,losses:r.losses,fw:r.frameWins,fl:r.frameLosses,pts:r.points})),
+    matches:ms.map(m=>({no:m.matchno,round:m.round,start:m.starttime,home:m.playerA?.name,away:m.playerB?.name,venue:m.playerA?.venue?.name||"",sa:m.scoreA,sb:m.scoreB,status:m.matchstatus,url:m.url}))};
+}
+function applyCs(d){
+  if(!d||!Array.isArray(d.matches)||!d.matches.length)return;
+  MATCHES=d.matches.filter(m=>m.start&&m.home&&m.away).map(m=>({no:m.no,round:m.round,date:new Date(m.start),home:m.home,away:m.away,venue:m.venue||"",thuis:m.home===US,opp:m.home===US?m.away:m.home,sa:m.sa,sb:m.sb,status:m.status,url:m.url})).sort((a,b)=>a.date-b.date);
+  if(Array.isArray(d.standings)&&d.standings.length){
+    STAND=d.standings.map(r=>[r.pos,r.name,r.played,r.wins,r.ties,r.losses,r.fw,r.fl,r.pts]);
+    const us=d.standings.find(r=>r.name===US);
+    if(us)$("sub").textContent=`${T.competition} · ${us.pos}e, ${us.pts} punten na ${us.played} duels`;
+  }
+  if(d.updated){csUpdated=new Intl.DateTimeFormat("nl-NL",{day:"numeric",month:"long",hour:"2-digit",minute:"2-digit"}).format(new Date(d.updated));$("standhint").textContent=`Van CueScore, bijgewerkt ${csUpdated}.`}
+  splitMatches();renderAll();
+}
+async function loadCs(){
+  try{const ctl=new AbortController();const t=setTimeout(()=>ctl.abort(),6000);
+    const r=await fetch(`https://api.cuescore.com/tournament/?id=${TOURNAMENT_ID}`,{signal:ctl.signal});clearTimeout(t);
+    if(r.ok){applyCs(fromApi(await r.json()));return}}catch(e){}
+  try{const r=await fetch("data/cuescore.json",{cache:"no-store"});if(r.ok)applyCs(await r.json())}catch(e){}
+}
+loadCs();
+document.addEventListener("visibilitychange",()=>{if(!document.hidden)loadCs()});
+
+// Teamcode
+$("logout").addEventListener("click",()=>forgetCode());
+function forgetCode(){auth=null;store.set(T.slug+"-auth","");syncAuth();renderAll()}
+$("codecard").addEventListener("submit",async ev=>{ev.preventDefault();const c=$("codein").value.trim().toUpperCase();if(!c||!me||!SB)return;
+  $("codemsg").textContent="Controleren…";
+  try{const {data,error}=await SB.rpc("check_player_t",{p_team:T.slug,p_player:me,p_code:c});if(error)throw error;
+    if(data==="admin"||data==="speler"){auth={player:me,code:c,admin:data==="admin"};store.set(T.slug+"-auth",JSON.stringify(auth));syncAuth();$("codein").value="";$("codemsg").textContent="";renderAll()}
+    else{$("codemsg").textContent=`Deze code hoort niet bij ${PLAYERS.find(p=>p.id===me)?.name||"deze speler"}.`}}
+  catch(e){$("codemsg").textContent="Controleren lukt nu niet. Probeer het zo opnieuw."}});
+
+// Supabase-koppeling met dezelfde vorm als de oude opslag
+let SB=null;
+function makeDb(){
+  const cfg=window.BOD_CONFIG||{};
+  if(!window.supabase||!cfg.supabaseUrl||!cfg.supabaseKey)return null;
+  SB=window.supabase.createClient(cfg.supabaseUrl,cfg.supabaseKey,{auth:{persistSession:false}});
+  const fail=error=>{const e=new Error(error.message||"fout");e.code=/bad_code/.test(error.message||"")?"bad_code":"error";throw e};
+  async function write(name,id,d){
+    if(name==="opgaves"){const {error}=await SB.rpc("set_opgave_t",{p_team:T.slug,p_code:teamCode,p_match:d.match,p_player:d.player,p_status:d.status||"",p_prefs:d.prefs||[]});if(error)fail(error)}
+    else if(name==="opstelling"){const {error}=await SB.rpc("set_opstelling_t",{p_team:T.slug,p_code:teamCode,p_match:d.match,p_slots:d.slots||{}});if(error)fail(error)}
+    else{const {error}=await SB.rpc("set_uitslag",{p_code:teamCode,p_match:+id,p_ons:d?d.ons:null,p_tegen:d?d.tegen:null});if(error)fail(error)}
+  }
+  function toDoc(name,r){
+    if(name==="opgaves")return{id:r.match+"_"+r.player,data:()=>({match:r.match,player:r.player,status:r.status||"",prefs:r.prefs||[],updatedAt:r.updated_at})};
+    if(name==="opstelling")return{id:String(r.match),data:()=>({match:r.match,slots:r.slots||{}})};
+    return{id:String(r.match),data:()=>({match:r.match,ons:r.ons,tegen:r.tegen,updatedAt:r.updated_at})};
+  }
+  return{collection(name){return{
+    doc(id){return{set:d=>write(name,id,d),delete:()=>write(name,id,null)}},
+    onSnapshot(next,err){
+      let busy=false,again=false;
+      const load=async()=>{if(busy){again=true;return}busy=true;
+        try{const {data,error}=await SB.from(name).select("*").eq("team",T.slug);if(error)throw error;next({docs:data.map(r=>toDoc(name,r))})}
+        catch(e){err&&err({code:e.code||"unavailable"})}
+        busy=false;if(again){again=false;load()}};
+      load();
+      SB.channel("rt-"+T.slug+"-"+name).on("postgres_changes",{event:"*",schema:"public",table:name,filter:"team=eq."+T.slug},()=>load()).subscribe();
+      document.addEventListener("visibilitychange",()=>{if(!document.hidden)load()});
+      return()=>{};
+    }}}};
+}
+
+// Installeren
+let deferredPrompt=null;
+const standalone=matchMedia("(display-mode: standalone)").matches||navigator.standalone===true;
+if(standalone){$("install").hidden=true;$("installbar").hidden=true}
+window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferredPrompt=e;$("installbtn").hidden=false});
+$("installbtn").addEventListener("click",async()=>{if(!deferredPrompt)return;deferredPrompt.prompt();await deferredPrompt.userChoice.catch(()=>{});deferredPrompt=null;$("installbtn").hidden=true});
+window.addEventListener("appinstalled",()=>{$("install").hidden=true;$("installbar").hidden=true});
+$("installbar").addEventListener("click",ev=>{ev.preventDefault();showTab("wedstrijd");$("install").scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"start"})});
+if("serviceWorker" in navigator&&location.protocol!=="file:")navigator.serviceWorker.register("sw.js",{updateViaCache:"none"}).catch(()=>{});
+
+// Database
+(async()=>{
+  const timer=setTimeout(()=>{if(!dbReady){dbReady=true;$("dbnote").hidden=false;$("dbnote").textContent="De opgaves konden niet geladen worden. Controleer je verbinding en open de app opnieuw.";renderAll()}},10000);
+  let d=null;try{d=makeDb()}catch(e){d=null}
+  if(!d){clearTimeout(timer);dbReady=true;$("dbnote").hidden=false;$("dbnote").textContent="Je ziet het schema, maar de opgaves zijn nog niet gekoppeld. De database is nog niet ingesteld.";renderAll();return}
+  db=d;
+  db.collection("opstelling").onSnapshot(snap=>{const r={};for(const doc of snap.docs){const v=doc.data();if(v)r[v.match]={slots:v.slots||{}}}lineups=r;renderTeam()},()=>{});
+  db.collection("opgaves").onSnapshot(snap=>{
+    clearTimeout(timer);dbReady=true;$("dbnote").hidden=true;
+    const next={};for(const doc of snap.docs){const v=doc.data();if(v)next[doc.id]=v}
+    entries=next;renderAll();
+  },err=>{clearTimeout(timer);dbReady=true;$("dbnote").hidden=false;$("dbnote").textContent="Opgaves laden mislukt ("+(err?.code||"onbekend")+"). Probeer het later opnieuw.";renderAll()});
+})();
+</script>
+<script>["gesturestart","gesturechange"].forEach(t=>document.addEventListener(t,e=>e.preventDefault(),{passive:false}));document.addEventListener("touchmove",e=>{if(e.touches.length>1)e.preventDefault()},{passive:false});</script>
+</body>
+</html>
