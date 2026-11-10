@@ -35,7 +35,7 @@ export function computeStats(tournament, subs) {
     const singles = Object.entries(pl.g).filter(([k]) => k !== "k9b").map(([, s]) => s);
     const p = singles.reduce((n, s) => n + s.p, 0), w = singles.reduce((n, s) => n + s.w, 0);
     const pr = teamPlayed[pl.teamId] ? pl.rounds.size / teamPlayed[pl.teamId] : 0;
-    return { id: pl.id, name: pl.name, teamId: pl.teamId, team: pl.team, p, w, pct: p ? w / p : 0, pr: Math.min(1, pr), g: pl.g };
+    return { id: pl.id, name: pl.name, teamId: pl.teamId, team: pl.team, p, w, pct: p ? w / p : 0, pr: Math.min(1, pr), m: pl.rounds.size, g: pl.g };
   });
   return list;
 }
@@ -44,7 +44,7 @@ export function teamStats(list, teamId) {
   const r = v => Math.round(v * 1000) / 1000;
   const mvp = list.filter(x => x.p > 0).sort((a, b) => b.pct - a.pct || b.w - a.w || b.p - a.p || a.name.localeCompare(b.name));
   return {
-    team: list.filter(x => x.teamId == teamId).sort((a, b) => a.name.localeCompare(b.name)).map(x => ({ id: x.id, name: x.name, p: x.p, w: x.w, pr: r(x.pr), g: x.g })),
+    team: list.filter(x => x.teamId == teamId).sort((a, b) => a.name.localeCompare(b.name)).map(x => ({ id: x.id, name: x.name, p: x.p, w: x.w, pr: r(x.pr), m: x.m, g: x.g })),
     mvp: mvp.map(x => ({ id: x.id, name: x.name, team: x.team, us: x.teamId == teamId, p: x.p, w: x.w, pct: r(x.pct), pr: r(x.pr), low: x.pr < MIN_PR }))
   };
 }

@@ -130,7 +130,7 @@ select{background:var(--surface);border:1px solid var(--line);border-radius:8px;
 .tbl th:nth-child(2),.tbl td:nth-child(2){text-align:left}
 .tbl td:nth-child(2){white-space:normal;min-width:96px}
 .tbl td:last-child{font-weight:700}
-.ptbl th,.ptbl td{min-width:0!important;text-align:center!important;padding-left:2px!important;padding-right:2px!important}.ptbl th:first-child,.ptbl td:first-child{text-align:left!important;white-space:normal;min-width:0!important;max-width:72px;overflow:hidden;text-overflow:ellipsis}.ptbl td:last-child{font-weight:400}
+.ptbl th,.ptbl td{min-width:0!important;text-align:center!important;padding-left:2px!important;padding-right:2px!important}.ptbl th:first-child,.ptbl td:first-child{text-align:left!important;white-space:normal;min-width:0!important;width:34%}.ptbl .pn{display:block;font-size:14px}.ptbl td:first-child .wg{font-size:11px;line-height:1.35}.ptbl td:last-child{font-weight:400}
 .ptbl .pc{display:block;font-weight:700;font-size:13px}.ptbl .wg{display:block;font-size:11px;color:var(--muted)}.ptbl .tot{background:var(--felt)}
 .mvptbl td:nth-child(2) small{display:block;color:var(--muted);font-size:11px;font-weight:400}.mvptbl tr.us td small{color:inherit;opacity:.8}
 .lowpr{margin-top:12px}.lowpr summary{cursor:pointer;color:var(--muted);font-size:13px;padding:6px 0}.hint.small{font-size:12px;margin-top:8px}
@@ -277,7 +277,7 @@ footer a{color:inherit}
     <section class="card">
       <div><h2>Onze spelers</h2><p class="hint" id="statshint">Percentage gewonnen partijen per spelsoort, uit alle uitslagen op CueScore.</p></div>
       <div class="tblwrap"><table class="tbl ptbl" id="ptbl"></table></div>
-      <p class="hint small">Enkel = alle enkelpartijen samen (koppel telt niet mee), net als in de MVP-lijst.</p>
+      <p class="hint small">Enkel = alle enkelpartijen samen (koppel telt niet mee), net als in de MVP-lijst. Partijen per wedstrijd: gemiddeld per wedstrijd waarin je speelde, koppel telt als halve partij.</p>
     </section>
     <section class="card">
       <div><h2>MVP-lijst</h2><p class="hint">Iedereen in de Tweede Klasse Overijssel, op percentage gewonnen enkelpartijen. Wie minder dan 60% van de wedstrijden van zijn team speelde, staat onderaan apart.</p></div>
@@ -539,7 +539,10 @@ function renderStats(st){
   if(!st||!Array.isArray(st.team))return;
   const cell=(s,cls="")=>s&&s.p?`<td class="${cls}"><span class="pc">${pctTxt(s.w,s.p)}</span><span class="wg">${s.w}/${s.p}</span></td>`:`<td class="${cls}"><span class="wg">–</span></td>`;
   const rows=[...st.team,...PLAYERS.filter(q=>!st.team.some(t=>t.id===q.id)).map(q=>({id:q.id,name:q.name,p:0,w:0,g:{}}))].sort((a,b)=>(b.p?b.w/b.p:-1)-(a.p?a.w/a.p:-1)||a.name.localeCompare(b.name));
-  $("ptbl").innerHTML=`<thead><tr><th>Speler</th>${SG.map(([,n,l])=>`<th title="${n}">${l}</th>`).join("")}<th title="Alle enkelpartijen">Enkel</th></tr></thead><tbody>`+
+  const nl=v=>v.toLocaleString("nl-NL",{maximumFractionDigits:1,minimumFractionDigits:1});
+  $("ptbl").innerHTML=`<thead><tr><th>Speler</th>${SG.map(([,n,l])=>`<th title="${n}">${l}</th>`).join("")}</tr></thead><tbody>`+
+    rows.map(p=>{const parts=p.p+((p.g.k9b&&p.g.k9b.p)||0)/2;const per=p.m?parts/p.m:0;
+      return `<tr class="${p.id===me?"us":""}"><td><b class="pn">${esc(first(p.name))}</b><span class="wg">enkel ${pctTxt(p.w,p.p)}${p.p?` (${p.w}/${p.p})`:""}</span><span class="wg">${p.m?`${nl(per)} per wedstrijd`:"nog niet gespeeld"}</span></td>${SG.map(([k])=>cell(p.g[k])).join("")}</tr>`}).join("")+"</tbody>";
     rows.map(p=>`<tr class="${p.id===me?"us":""}"><td>${esc(first(p.name))}</td>${SG.map(([k])=>cell(p.g[k])).join("")}${cell({p:p.p,w:p.w},"tot")}</tr>`).join("")+"</tbody>";
   const mvpRows=(list,ranked)=>`<thead><tr><th>#</th><th>Speler</th><th title="Gewonnen/gespeeld">W/G</th><th title="Deel van de teamwedstrijden gespeeld">Gesp.</th><th>MVP</th></tr></thead><tbody>`+
     list.map((x,i)=>`<tr class="${x.us?"us":""}"><td>${ranked?i+1:""}</td><td>${esc(x.name)}<small>${esc(x.team||"")}</small></td><td>${x.w}/${x.p}</td><td>${Math.round(x.pr*100)}%</td><td>${Math.round(x.pct*100)}%</td></tr>`).join("")+"</tbody>";
