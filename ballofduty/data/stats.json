@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-11T01:55:22Z",
+ "updated": "2026-11-11T09:20:00Z",
  "team": [
   {
    "id": "1162921",
@@ -245,7 +245,7 @@
    "p": 7,
    "w": 6,
    "pct": 0.857,
-   "pr": 0.857,
+   "pr": 1,
    "low": false
   },
   {
@@ -377,7 +377,7 @@
    "p": 7,
    "w": 5,
    "pct": 0.714,
-   "pr": 0.857,
+   "pr": 1,
    "low": false
   },
   {
@@ -579,17 +579,6 @@
    "low": false
   },
   {
-   "id": "63137764",
-   "name": "Quincy Lovert",
-   "team": "Sjoel98",
-   "us": false,
-   "p": 6,
-   "w": 3,
-   "pct": 0.5,
-   "pr": 0.857,
-   "low": false
-  },
-  {
    "id": "60278740",
    "name": "Roel van Engelen",
    "team": "Sjoel Shooters",
@@ -689,6 +678,17 @@
    "low": false
   },
   {
+   "id": "63137764",
+   "name": "Quincy Lovert",
+   "team": "Sjoel98",
+   "us": false,
+   "p": 7,
+   "w": 3,
+   "pct": 0.429,
+   "pr": 1,
+   "low": false
+  },
+  {
    "id": "88840024",
    "name": "Yutong Zhang",
    "team": "'T stek ons niks",
@@ -709,17 +709,6 @@
    "pct": 0.4,
    "pr": 0.667,
    "low": false
-  },
-  {
-   "id": "84741142",
-   "name": "Jonathan Solcer",
-   "team": "Sjoel98",
-   "us": false,
-   "p": 5,
-   "w": 2,
-   "pct": 0.4,
-   "pr": 0.571,
-   "low": true
   },
   {
    "id": "62678155",
@@ -762,7 +751,7 @@
    "p": 8,
    "w": 3,
    "pct": 0.375,
-   "pr": 0.857,
+   "pr": 1,
    "low": false
   },
   {
@@ -817,7 +806,7 @@
    "p": 3,
    "w": 1,
    "pct": 0.333,
-   "pr": 0.429,
+   "pr": 0.5,
    "low": true
   },
   {
@@ -839,7 +828,7 @@
    "p": 8,
    "w": 2,
    "pct": 0.25,
-   "pr": 0.857,
+   "pr": 1,
    "low": false
   },
   {
@@ -857,6 +846,28 @@
    "id": "81089416",
    "name": "Abraham van Putten",
    "team": "BallBreakers",
+   "us": false,
+   "p": 4,
+   "w": 1,
+   "pct": 0.25,
+   "pr": 0.667,
+   "low": false
+  },
+  {
+   "id": "75734626",
+   "name": "Daniël Heikens",
+   "team": "De 6 Muskebiers",
+   "us": false,
+   "p": 4,
+   "w": 1,
+   "pct": 0.25,
+   "pr": 0.667,
+   "low": false
+  },
+  {
+   "id": "84741142",
+   "name": "Jonathan Solcer",
+   "team": "Sjoel98",
    "us": false,
    "p": 4,
    "w": 1,
@@ -887,6 +898,17 @@
    "low": true
   },
   {
+   "id": "67010215",
+   "name": "Ymke Jonge",
+   "team": "De 6 Muskebiers",
+   "us": false,
+   "p": 5,
+   "w": 1,
+   "pct": 0.2,
+   "pr": 0.667,
+   "low": false
+  },
+  {
    "id": "65041606",
    "name": "Abinash Vinayagamoorthy",
    "team": "Sjoel98",
@@ -894,7 +916,7 @@
    "p": 6,
    "w": 1,
    "pct": 0.167,
-   "pr": 0.857,
+   "pr": 1,
    "low": false
   },
   {
@@ -906,17 +928,6 @@
    "w": 1,
    "pct": 0.167,
    "pr": 0.857,
-   "low": false
-  },
-  {
-   "id": "67010215",
-   "name": "Ymke Jonge",
-   "team": "De 6 Muskebiers",
-   "us": false,
-   "p": 6,
-   "w": 1,
-   "pct": 0.167,
-   "pr": 0.714,
    "low": false
   },
   {
@@ -983,17 +994,6 @@
    "w": 0,
    "pct": 0,
    "pr": 0.429,
-   "low": true
-  },
-  {
-   "id": "75734626",
-   "name": "Daniël Heikens",
-   "team": "De 6 Muskebiers",
-   "us": false,
-   "p": 3,
-   "w": 0,
-   "pct": 0,
-   "pr": 0.571,
    "low": true
   },
   {

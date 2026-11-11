@@ -1,6 +1,6 @@
 // Bewaart de app zodat hij snel opent en ook zonder internet het schema laat zien.
 const TEAM = "ballofduty";
-const CACHE = TEAM + "-b9d423fa";
+const CACHE = TEAM + "-c81e07fa";
 const SHELL = ["./", "index.html", "../config.js?v=4", "manifest.webmanifest", "logo.jpg",
   "icons/icon-192.png", "icons/icon-512.png", "icons/apple-touch-icon.png",
   "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"];

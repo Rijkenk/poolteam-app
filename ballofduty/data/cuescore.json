@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-11T01:55:22Z",
+ "updated": "2026-11-11T09:20:00Z",
  "standings": [
   {
    "pos": 1,
@@ -80,17 +80,6 @@
   },
   {
    "pos": 7,
-   "name": "Sjoel98",
-   "played": 7,
-   "wins": 2,
-   "ties": 2,
-   "losses": 3,
-   "fw": 20,
-   "fl": 21,
-   "pts": 22
-  },
-  {
-   "pos": 7,
    "name": "Het Fundament Der Synagoge",
    "played": 7,
    "wins": 2,
@@ -101,7 +90,7 @@
    "pts": 22
   },
   {
-   "pos": 10,
+   "pos": 9,
    "name": "The Pooligans",
    "played": 7,
    "wins": 2,
@@ -112,7 +101,7 @@
    "pts": 20
   },
   {
-   "pos": 11,
+   "pos": 10,
    "name": "Ball of Duty",
    "played": 7,
    "wins": 2,
@@ -123,7 +112,7 @@
    "pts": 19
   },
   {
-   "pos": 12,
+   "pos": 11,
    "name": "De Sjoeligans",
    "played": 7,
    "wins": 2,
@@ -132,6 +121,17 @@
    "fw": 16,
    "fl": 26,
    "pts": 18
+  },
+  {
+   "pos": 12,
+   "name": "Sjoel98",
+   "played": 6,
+   "wins": 1,
+   "ties": 2,
+   "losses": 3,
+   "fw": 16,
+   "fl": 20,
+   "pts": 17
   },
   {
    "pos": 13,
@@ -147,13 +147,13 @@
   {
    "pos": 14,
    "name": "De 6 Muskebiers",
-   "played": 7,
+   "played": 6,
    "wins": 0,
    "ties": 0,
-   "losses": 7,
-   "fw": 8,
-   "fl": 33,
-   "pts": 8
+   "losses": 6,
+   "fw": 7,
+   "fl": 29,
+   "pts": 7
   }
  ],
  "matches": [
