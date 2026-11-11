@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-10T21:48:31Z",
+ "updated": "2026-11-11T01:55:23Z",
  "team": [
   {
    "id": "1160910",
@@ -28,10 +28,10 @@
      "fl": 17
     },
     "k9b": {
-     "p": 2,
-     "w": 1,
-     "fw": 7,
-     "fl": 8
+     "p": 3,
+     "w": 2,
+     "fw": 13,
+     "fl": 9
     },
     "10b": {
      "p": 1,
@@ -44,9 +44,9 @@
   {
    "id": "1160764",
    "name": "Jeroen Van Valkenhoef",
-   "p": 6,
-   "w": 5,
-   "pr": 1,
+   "p": 7,
+   "w": 6,
+   "pr": 0.833,
    "m": 5,
    "g": {
     "141": {
@@ -68,10 +68,10 @@
      "fl": 6
     },
     "8b": {
-     "p": 2,
-     "w": 2,
-     "fw": 10,
-     "fl": 4
+     "p": 3,
+     "w": 3,
+     "fw": 15,
+     "fl": 5
     }
    }
   },
@@ -80,7 +80,7 @@
    "name": "Robère de Groot",
    "p": 7,
    "w": 4,
-   "pr": 1,
+   "pr": 0.833,
    "m": 5,
    "g": {
     "141": {
@@ -90,10 +90,10 @@
      "fl": 60
     },
     "k9b": {
-     "p": 3,
-     "w": 2,
-     "fw": 14,
-     "fl": 10
+     "p": 4,
+     "w": 3,
+     "fw": 20,
+     "fl": 11
     },
     "8b": {
      "p": 3,
@@ -120,7 +120,7 @@
    "name": "Roland Zwolsman",
    "p": 7,
    "w": 2,
-   "pr": 1,
+   "pr": 0.833,
    "m": 5,
    "g": {
     "141": {
@@ -187,7 +187,7 @@
    "p": 6,
    "w": 6,
    "pct": 1,
-   "pr": 1,
+   "pr": 0.857,
    "low": false
   },
   {
@@ -198,8 +198,8 @@
    "p": 4,
    "w": 4,
    "pct": 1,
-   "pr": 0.667,
-   "low": false
+   "pr": 0.571,
+   "low": true
   },
   {
    "id": "1160650",
@@ -220,7 +220,7 @@
    "p": 9,
    "w": 8,
    "pct": 0.889,
-   "pr": 1,
+   "pr": 0.857,
    "low": false
   },
   {
@@ -231,7 +231,7 @@
    "p": 7,
    "w": 6,
    "pct": 0.857,
-   "pr": 1,
+   "pr": 0.857,
    "low": false
   },
   {
@@ -239,21 +239,10 @@
    "name": "Jeroen Van Valkenhoef",
    "team": "Witchcraft",
    "us": true,
-   "p": 6,
-   "w": 5,
-   "pct": 0.833,
-   "pr": 1,
-   "low": false
-  },
-  {
-   "id": "1160763",
-   "name": "Bart Mistrate Haarhuis",
-   "team": "Hengelo Nine",
-   "us": false,
-   "p": 8,
+   "p": 7,
    "w": 6,
-   "pct": 0.75,
-   "pr": 1,
+   "pct": 0.857,
+   "pr": 0.833,
    "low": false
   },
   {
@@ -268,6 +257,17 @@
    "low": false
   },
   {
+   "id": "1160763",
+   "name": "Bart Mistrate Haarhuis",
+   "team": "Hengelo Nine",
+   "us": false,
+   "p": 9,
+   "w": 6,
+   "pct": 0.667,
+   "pr": 0.857,
+   "low": false
+  },
+  {
    "id": "1160374",
    "name": "Richard Gringhuis",
    "team": "Keus Genoeg",
@@ -275,19 +275,8 @@
    "p": 6,
    "w": 4,
    "pct": 0.667,
-   "pr": 1,
+   "pr": 0.833,
    "low": false
-  },
-  {
-   "id": "1160596",
-   "name": "Jorg Bonnamy",
-   "team": "Breaktime",
-   "us": false,
-   "p": 3,
-   "w": 2,
-   "pct": 0.667,
-   "pr": 0.5,
-   "low": true
   },
   {
    "id": "1160359",
@@ -297,7 +286,7 @@
    "p": 3,
    "w": 2,
    "pct": 0.667,
-   "pr": 0.8,
+   "pr": 0.667,
    "low": false
   },
   {
@@ -308,7 +297,7 @@
    "p": 8,
    "w": 5,
    "pct": 0.625,
-   "pr": 0.8,
+   "pr": 0.667,
    "low": false
   },
   {
@@ -363,7 +352,7 @@
    "p": 7,
    "w": 4,
    "pct": 0.571,
-   "pr": 1,
+   "pr": 0.833,
    "low": false
   },
   {
@@ -418,7 +407,7 @@
    "p": 6,
    "w": 3,
    "pct": 0.5,
-   "pr": 0.8,
+   "pr": 0.667,
    "low": false
   },
   {
@@ -444,9 +433,31 @@
    "low": true
   },
   {
+   "id": "1160596",
+   "name": "Jorg Bonnamy",
+   "team": "Breaktime",
+   "us": false,
+   "p": 4,
+   "w": 2,
+   "pct": 0.5,
+   "pr": 0.667,
+   "low": false
+  },
+  {
    "id": "1077487",
    "name": "Mark Gerritzen",
    "team": "Sjoel 1",
+   "us": false,
+   "p": 4,
+   "w": 2,
+   "pct": 0.5,
+   "pr": 0.667,
+   "low": false
+  },
+  {
+   "id": "1160830",
+   "name": "Steven Biharie",
+   "team": "PVE Eightballers",
    "us": false,
    "p": 4,
    "w": 2,
@@ -477,6 +488,17 @@
    "low": true
   },
   {
+   "id": "3184410",
+   "name": "Kevin Mengerink",
+   "team": "Roze Ferdi en de Flamingo’s",
+   "us": false,
+   "p": 5,
+   "w": 2,
+   "pct": 0.4,
+   "pr": 1,
+   "low": false
+  },
+  {
    "id": "18317014",
    "name": "Boris Gaarthuis",
    "team": "Roze Ferdi en de Flamingo’s",
@@ -485,17 +507,6 @@
    "w": 3,
    "pct": 0.375,
    "pr": 1,
-   "low": false
-  },
-  {
-   "id": "1160830",
-   "name": "Steven Biharie",
-   "team": "PVE Eightballers",
-   "us": false,
-   "p": 3,
-   "w": 1,
-   "pct": 0.333,
-   "pr": 0.6,
    "low": false
   },
   {
@@ -517,7 +528,7 @@
    "p": 7,
    "w": 2,
    "pct": 0.286,
-   "pr": 1,
+   "pr": 0.833,
    "low": false
   },
   {
@@ -528,7 +539,7 @@
    "p": 7,
    "w": 2,
    "pct": 0.286,
-   "pr": 1,
+   "pr": 0.833,
    "low": false
   },
   {
@@ -540,17 +551,6 @@
    "w": 2,
    "pct": 0.25,
    "pr": 1,
-   "low": false
-  },
-  {
-   "id": "3184410",
-   "name": "Kevin Mengerink",
-   "team": "Roze Ferdi en de Flamingo’s",
-   "us": false,
-   "p": 4,
-   "w": 1,
-   "pct": 0.25,
-   "pr": 0.8,
    "low": false
   },
   {
@@ -583,18 +583,7 @@
    "p": 5,
    "w": 1,
    "pct": 0.2,
-   "pr": 0.8,
-   "low": false
-  },
-  {
-   "id": "1162934",
-   "name": "Trayvon Rörink",
-   "team": "Keus Genoeg",
-   "us": false,
-   "p": 6,
-   "w": 1,
-   "pct": 0.167,
-   "pr": 1,
+   "pr": 0.667,
    "low": false
   },
   {
@@ -606,6 +595,17 @@
    "w": 1,
    "pct": 0.143,
    "pr": 0.833,
+   "low": false
+  },
+  {
+   "id": "1162934",
+   "name": "Trayvon Rörink",
+   "team": "Keus Genoeg",
+   "us": false,
+   "p": 7,
+   "w": 1,
+   "pct": 0.143,
+   "pr": 1,
    "low": false
   },
   {
@@ -649,7 +649,7 @@
    "p": 4,
    "w": 0,
    "pct": 0,
-   "pr": 0.8,
+   "pr": 0.667,
    "low": false
   }
  ]
