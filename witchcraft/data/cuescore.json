@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-11T01:55:23Z",
+ "updated": "2026-11-11T17:52:35Z",
  "standings": [
   {
    "pos": 1,
@@ -59,24 +59,24 @@
   {
    "pos": 6,
    "name": "Breaktime",
-   "played": 6,
+   "played": 7,
    "wins": 1,
-   "ties": 2,
+   "ties": 3,
    "losses": 3,
-   "fw": 14,
-   "fl": 22,
-   "pts": 15
+   "fw": 17,
+   "fl": 25,
+   "pts": 18
   },
   {
    "pos": 6,
    "name": "Roze Ferdi en de Flamingo’s",
-   "played": 5,
+   "played": 6,
    "wins": 1,
-   "ties": 2,
+   "ties": 3,
    "losses": 2,
-   "fw": 14,
-   "fl": 16,
-   "pts": 15
+   "fw": 17,
+   "fl": 19,
+   "pts": 18
   },
   {
    "pos": 8,

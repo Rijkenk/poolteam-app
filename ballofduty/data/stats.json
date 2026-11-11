@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-11T09:20:00Z",
+ "updated": "2026-11-11T17:52:34Z",
  "team": [
   {
    "id": "1162921",
@@ -245,7 +245,7 @@
    "p": 7,
    "w": 6,
    "pct": 0.857,
-   "pr": 1,
+   "pr": 0.857,
    "low": false
   },
   {
@@ -271,6 +271,17 @@
    "low": false
   },
   {
+   "id": "1162969",
+   "name": "Riccardo Sirchia",
+   "team": "BallBreakers",
+   "us": false,
+   "p": 6,
+   "w": 5,
+   "pct": 0.833,
+   "pr": 0.714,
+   "low": false
+  },
+  {
    "id": "1163632",
    "name": "Rex Labrijn",
    "team": "'T stek ons niks",
@@ -280,17 +291,6 @@
    "pct": 0.8,
    "pr": 0.571,
    "low": true
-  },
-  {
-   "id": "1162969",
-   "name": "Riccardo Sirchia",
-   "team": "BallBreakers",
-   "us": false,
-   "p": 5,
-   "w": 4,
-   "pct": 0.8,
-   "pr": 0.667,
-   "low": false
   },
   {
    "id": "1163354",
@@ -313,17 +313,6 @@
    "pct": 0.75,
    "pr": 1,
    "low": false
-  },
-  {
-   "id": "82628659",
-   "name": "Jurriën Bouwkamp",
-   "team": "BallBreakers",
-   "us": false,
-   "p": 4,
-   "w": 3,
-   "pct": 0.75,
-   "pr": 0.5,
-   "low": true
   },
   {
    "id": "13682257",
@@ -377,6 +366,17 @@
    "p": 7,
    "w": 5,
    "pct": 0.714,
+   "pr": 0.857,
+   "low": false
+  },
+  {
+   "id": "1164076",
+   "name": "Baik de Jong",
+   "team": "De gedraaide ballen",
+   "us": false,
+   "p": 9,
+   "w": 6,
+   "pct": 0.667,
    "pr": 1,
    "low": false
   },
@@ -403,9 +403,31 @@
    "low": false
   },
   {
+   "id": "82628659",
+   "name": "Jurriën Bouwkamp",
+   "team": "BallBreakers",
+   "us": false,
+   "p": 6,
+   "w": 4,
+   "pct": 0.667,
+   "pr": 0.571,
+   "low": true
+  },
+  {
    "id": "50998693",
    "name": "Marcin Jasinski",
    "team": "The Cue Crusaders",
+   "us": false,
+   "p": 6,
+   "w": 4,
+   "pct": 0.667,
+   "pr": 0.571,
+   "low": true
+  },
+  {
+   "id": "62634325",
+   "name": "Tim Olthof",
+   "team": "BallBreakers",
    "us": false,
    "p": 6,
    "w": 4,
@@ -432,17 +454,6 @@
    "p": 11,
    "w": 7,
    "pct": 0.636,
-   "pr": 1,
-   "low": false
-  },
-  {
-   "id": "1164076",
-   "name": "Baik de Jong",
-   "team": "De gedraaide ballen",
-   "us": false,
-   "p": 8,
-   "w": 5,
-   "pct": 0.625,
    "pr": 1,
    "low": false
   },
@@ -476,18 +487,7 @@
    "p": 5,
    "w": 3,
    "pct": 0.6,
-   "pr": 0.667,
-   "low": false
-  },
-  {
-   "id": "62634325",
-   "name": "Tim Olthof",
-   "team": "BallBreakers",
-   "us": false,
-   "p": 5,
-   "w": 3,
-   "pct": 0.6,
-   "pr": 0.5,
+   "pr": 0.571,
    "low": true
   },
   {
@@ -535,14 +535,14 @@
    "low": false
   },
   {
-   "id": "18356089",
-   "name": "Robin VLeeuwen",
-   "team": "De gedraaide ballen",
+   "id": "60209794",
+   "name": "Guus Koelman",
+   "team": "BallBreakers",
    "us": false,
-   "p": 8,
-   "w": 4,
+   "p": 6,
+   "w": 3,
    "pct": 0.5,
-   "pr": 1,
+   "pr": 0.714,
    "low": false
   },
   {
@@ -554,17 +554,6 @@
    "w": 3,
    "pct": 0.5,
    "pr": 0.714,
-   "low": false
-  },
-  {
-   "id": "18016759",
-   "name": "jens van de wetering",
-   "team": "De gedraaide ballen",
-   "us": false,
-   "p": 6,
-   "w": 3,
-   "pct": 0.5,
-   "pr": 0.833,
    "low": false
   },
   {
@@ -608,7 +597,7 @@
    "p": 2,
    "w": 1,
    "pct": 0.5,
-   "pr": 0.5,
+   "pr": 0.429,
    "low": true
   },
   {
@@ -626,6 +615,17 @@
    "id": "72562396",
    "name": "David de Leau",
    "team": "De Sjoeligans",
+   "us": false,
+   "p": 9,
+   "w": 4,
+   "pct": 0.444,
+   "pr": 1,
+   "low": false
+  },
+  {
+   "id": "18356089",
+   "name": "Robin VLeeuwen",
+   "team": "De gedraaide ballen",
    "us": false,
    "p": 9,
    "w": 4,
@@ -685,7 +685,7 @@
    "p": 7,
    "w": 3,
    "pct": 0.429,
-   "pr": 1,
+   "pr": 0.857,
    "low": false
   },
   {
@@ -700,15 +700,15 @@
    "low": false
   },
   {
-   "id": "60209794",
-   "name": "Guus Koelman",
-   "team": "BallBreakers",
+   "id": "84741142",
+   "name": "Jonathan Solcer",
+   "team": "Sjoel98",
    "us": false,
    "p": 5,
    "w": 2,
    "pct": 0.4,
-   "pr": 0.667,
-   "low": false
+   "pr": 0.571,
+   "low": true
   },
   {
    "id": "62678155",
@@ -733,14 +733,14 @@
    "low": false
   },
   {
-   "id": "18016765",
-   "name": "Justin de Wit",
+   "id": "18016759",
+   "name": "jens van de wetering",
    "team": "De gedraaide ballen",
    "us": false,
    "p": 8,
    "w": 3,
    "pct": 0.375,
-   "pr": 1,
+   "pr": 0.857,
    "low": false
   },
   {
@@ -751,6 +751,17 @@
    "p": 8,
    "w": 3,
    "pct": 0.375,
+   "pr": 0.857,
+   "low": false
+  },
+  {
+   "id": "18016765",
+   "name": "Justin de Wit",
+   "team": "De gedraaide ballen",
+   "us": false,
+   "p": 9,
+   "w": 3,
+   "pct": 0.333,
    "pr": 1,
    "low": false
   },
@@ -806,7 +817,7 @@
    "p": 3,
    "w": 1,
    "pct": 0.333,
-   "pr": 0.5,
+   "pr": 0.429,
    "low": true
   },
   {
@@ -828,7 +839,7 @@
    "p": 8,
    "w": 2,
    "pct": 0.25,
-   "pr": 1,
+   "pr": 0.857,
    "low": false
   },
   {
@@ -850,8 +861,8 @@
    "p": 4,
    "w": 1,
    "pct": 0.25,
-   "pr": 0.667,
-   "low": false
+   "pr": 0.571,
+   "low": true
   },
   {
    "id": "75734626",
@@ -861,19 +872,8 @@
    "p": 4,
    "w": 1,
    "pct": 0.25,
-   "pr": 0.667,
-   "low": false
-  },
-  {
-   "id": "84741142",
-   "name": "Jonathan Solcer",
-   "team": "Sjoel98",
-   "us": false,
-   "p": 4,
-   "w": 1,
-   "pct": 0.25,
-   "pr": 0.667,
-   "low": false
+   "pr": 0.571,
+   "low": true
   },
   {
    "id": "18034573",
@@ -898,17 +898,6 @@
    "low": true
   },
   {
-   "id": "67010215",
-   "name": "Ymke Jonge",
-   "team": "De 6 Muskebiers",
-   "us": false,
-   "p": 5,
-   "w": 1,
-   "pct": 0.2,
-   "pr": 0.667,
-   "low": false
-  },
-  {
    "id": "65041606",
    "name": "Abinash Vinayagamoorthy",
    "team": "Sjoel98",
@@ -916,7 +905,7 @@
    "p": 6,
    "w": 1,
    "pct": 0.167,
-   "pr": 1,
+   "pr": 0.857,
    "low": false
   },
   {
@@ -928,6 +917,17 @@
    "w": 1,
    "pct": 0.167,
    "pr": 0.857,
+   "low": false
+  },
+  {
+   "id": "67010215",
+   "name": "Ymke Jonge",
+   "team": "De 6 Muskebiers",
+   "us": false,
+   "p": 6,
+   "w": 1,
+   "pct": 0.167,
+   "pr": 0.714,
    "low": false
   },
   {
