@@ -97,6 +97,7 @@ select{background:var(--surface);border:1px solid var(--line);border-radius:8px;
 .team li{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 0;border-top:1px solid var(--line)}
 .team li:first-child{border-top:0}
 .pname{font-weight:500;min-width:0}
+a.plink{color:inherit;text-decoration:none;border-bottom:1px dotted var(--muted)}a.plink:hover{border-bottom-style:solid}
 .pname em{font-style:normal;color:var(--muted);font-size:12px;margin-left:6px}
 .right{display:flex;align-items:center;gap:6px;flex-wrap:wrap;justify-content:flex-end}
 .pill{font-size:12px;font-weight:600;border-radius:999px;padding:2px 9px;white-space:nowrap}
@@ -319,6 +320,8 @@ const fmtShort=new Intl.DateTimeFormat("nl-NL",{day:"numeric",month:"short"});
 const fmtWd=new Intl.DateTimeFormat("nl-NL",{weekday:"short"});
 const fmtTime=new Intl.DateTimeFormat("nl-NL",{hour:"2-digit",minute:"2-digit"});
 const first=n=>n.split(" ")[0];
+const csUrl=(id,n)=>`https://cuescore.com/player/${encodeURIComponent(n).replace(/%20/g,"+")}/${encodeURIComponent(id)}`;
+const plink=(id,n,label=n)=>id?`<a class="plink" href="${csUrl(id,n)}" target="_blank" rel="noopener" title="CueScore-profiel van ${esc(n)}">${esc(label)}</a>`:esc(label);
 const store={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
 
 const now=new Date();
@@ -388,7 +391,7 @@ function renderTeam(){
     const asg=assigned(m.no,p.id);
     const chips=s==="nee"&&!asg.length?"":"<span class=\"chips\">"+(asg.length?asg.map(k=>GAMES.find(g=>g.k===k)).map(g=>`<span class="chip" style="--c:${g.c}" title="Speelt ${g.n}">${g.lab}</span>`).join(""):(e?.prefs||[]).includes("any")?'<span class="chip pref" style="--c:var(--line)" title="Geen voorkeur">?</span>':(e?.prefs||[]).map(k=>GAMES.find(g=>g.k===k)).filter(Boolean).map(g=>`<span class="chip pref" style="--c:${g.c}" title="Voorkeur ${g.n}">${g.lab}</span>`).join(""))+"</span>";
     const label={ja:"Erbij",misschien:"Misschien",nee:"Kan niet","":"Nog niet opgegeven"}[s];
-    return `<li><span class="pname">${esc(p.name)}${p.cap?"<em>captain</em>":""}${p.id===me?"<em>jij</em>":""}</span><span class="right">${chips}<span class="pill ${s||"open"}">${label}</span></span></li>`;
+    return `<li><span class="pname">${plink(p.id,p.name)}${p.cap?"<em>captain</em>":""}${p.id===me?"<em>jij</em>":""}</span><span class="right">${chips}<span class="pill ${s||"open"}">${label}</span></span></li>`;
   }).join("");
   $("sum").innerHTML=`<span><b>${ja}</b> erbij</span><span><b>${mis}</b> misschien</span><span><b>${nee}</b> kan niet</span><span><b>${PLAYERS.length-ja-mis-nee}</b> open</span>`;
   renderLineup();
@@ -557,10 +560,10 @@ function renderStats(st){
   const nl=v=>v.toLocaleString("nl-NL",{maximumFractionDigits:1,minimumFractionDigits:1});
   $("ptbl").innerHTML=`<thead><tr><th>Speler</th>${SG.map(([,n,l])=>`<th title="${n}">${l}</th>`).join("")}</tr></thead><tbody>`+
     rows.map(p=>{const parts=p.p+((p.g.k9b&&p.g.k9b.p)||0)/2;const per=p.m?parts/p.m:0;
-      return `<tr class="${p.id===me?"us":""}"><td><b class="pn">${esc(first(p.name))}</b><span class="wg">enkel ${pctTxt(p.w,p.p)}${p.p?` (${p.w}/${p.p})`:""}</span><span class="wg">${p.m?`${nl(per)} per wedstrijd`:"nog niet gespeeld"}</span></td>${SG.map(([k])=>cell(p.g[k])).join("")}</tr>`}).join("")+"</tbody>";
+      return `<tr class="${p.id===me?"us":""}"><td><b class="pn">${plink(p.id,p.name,first(p.name))}</b><span class="wg">enkel ${pctTxt(p.w,p.p)}${p.p?` (${p.w}/${p.p})`:""}</span><span class="wg">${p.m?`${nl(per)} per wedstrijd`:"nog niet gespeeld"}</span></td>${SG.map(([k])=>cell(p.g[k])).join("")}</tr>`}).join("")+"</tbody>";
     rows.map(p=>`<tr class="${p.id===me?"us":""}"><td>${esc(first(p.name))}</td>${SG.map(([k])=>cell(p.g[k])).join("")}${cell({p:p.p,w:p.w},"tot")}</tr>`).join("")+"</tbody>";
   const mvpRows=(list,ranked)=>`<thead><tr><th>#</th><th>Speler</th><th title="Gewonnen/gespeeld">W/G</th><th title="Deel van de teamwedstrijden gespeeld">Gesp.</th><th>MVP</th></tr></thead><tbody>`+
-    list.map((x,i)=>`<tr class="${x.us?"us":""}"><td>${ranked?i+1:""}</td><td>${esc(x.name)}<small>${esc(x.team||"")}</small></td><td>${x.w}/${x.p}</td><td>${Math.round(x.pr*100)}%</td><td>${Math.round(x.pct*100)}%</td></tr>`).join("")+"</tbody>";
+    list.map((x,i)=>`<tr class="${x.us?"us":""}"><td>${ranked?i+1:""}</td><td>${plink(x.id,x.name)}<small>${esc(x.team||"")}</small></td><td>${x.w}/${x.p}</td><td>${Math.round(x.pr*100)}%</td><td>${Math.round(x.pct*100)}%</td></tr>`).join("")+"</tbody>";
   const hi=st.mvp.filter(x=>!x.low),lo=st.mvp.filter(x=>x.low);
   $("mvp").innerHTML=mvpRows(hi,true);$("mvplow").innerHTML=mvpRows(lo,false);
   $("lowsum").textContent=`Minder dan 60% gespeeld (${lo.length})`;$("lowsum").parentElement.hidden=!lo.length;
