@@ -19,7 +19,7 @@ for (const f of readdirSync("teams").filter(f => f.endsWith(".json")).sort()) {
       updated: new Date().toISOString().replace(/\.\d+Z$/, "Z"),
       standings: (j.standings?.["1"] || []).map(r => ({ pos: r.position, name: r.player?.name, played: r.played, wins: r.wins, ties: r.ties, losses: r.losses, fw: r.frameWins, fl: r.frameLosses, pts: r.points })),
       matches: (j.matches || []).filter(m => m.playerA?.teamId == id || m.playerB?.teamId == id)
-        .map(m => ({ no: m.matchno, round: m.round, start: m.starttime, home: m.playerA?.name, away: m.playerB?.name, venue: m.playerA?.venue?.name || "", sa: m.scoreA, sb: m.scoreB, status: m.matchstatus, url: m.url }))
+        .map(m => ({ no: m.matchno, round: m.round, start: m.starttime, home: m.playerA?.name, away: m.playerB?.name, homeId: m.playerA?.teamId, awayId: m.playerB?.teamId, venue: m.playerA?.venue?.name || "", sa: m.scoreA, sb: m.scoreB, status: m.matchstatus, url: m.url }))
     };
     if (!out.matches.length) throw new Error("geen wedstrijden gevonden");
     mkdirSync(`${t.slug}/data`, { recursive: true });
