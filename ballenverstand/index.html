@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0b0b0c">
+<title>De Ballen verstand is verhuisd</title>
+<style>body{margin:0;background:#0b0b0c;color:#f2efe9;font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif;display:grid;place-items:center;min-height:100vh;text-align:center;padding:16px;box-sizing:border-box}a{color:#ff7a1a}</style>
+<script>
+// Deze app is verhuisd. Naam en code gaan mee in de link, zodat niemand opnieuw hoeft in te loggen.
+(function(){
+  var NEW="https://ballenverstand.poolteam.nl/", d={};
+  try{var me=localStorage.getItem("ballenverstand-me"),au=localStorage.getItem("ballenverstand-auth");if(me)d.me=me;if(au)d.auth=au;}catch(e){}
+  try{navigator.serviceWorker&&navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){if(r.scope.indexOf("/poolteam-app/")>-1)r.unregister()})})}catch(e){}
+  var q=Object.keys(d).length?"#mee="+encodeURIComponent(JSON.stringify(d)):"";
+  location.replace(NEW+q);
+})();
+</script>
+</head>
+<body><p>De Ballen verstand is verhuisd naar<br><a href="https://ballenverstand.poolteam.nl/">ballenverstand.poolteam.nl/</a></p></body>
+</html>
